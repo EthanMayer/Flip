@@ -9,7 +9,8 @@ class ThirdTab extends StatelessWidget {
           slivers: [
             CupertinoSliverNavigationBar(
               largeTitle: Text('Settings', style: TextStyle(color:
-                Color.fromRGBO(216, 171, 76, 1),)),
+                Color.fromRGBO(216, 171, 76, 1),)
+              ),
             ),
           ],
         )

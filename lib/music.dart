@@ -9,7 +9,8 @@ class SecondTab extends StatelessWidget {
           slivers: [
             CupertinoSliverNavigationBar(
               largeTitle: Text('Music', style: TextStyle(color:
-                Color.fromRGBO(216, 171, 76, 1),)),
+                Color.fromRGBO(216, 171, 76, 1),)
+              ),
             ),
             SliverGrid(
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
@@ -22,7 +23,7 @@ class SecondTab extends StatelessWidget {
                     (BuildContext context, int index) {
                   return Container(
                     alignment: Alignment.center,
-                    color: Colors.blue[100 * (index % 9)],
+                    color: Color.fromRGBO(216, 171, 76, 1),//blue[100 * (index % 9)],
                     child: Text('Grid Item $index'),
                   );
                 },

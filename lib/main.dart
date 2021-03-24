@@ -4,9 +4,9 @@ import 'home.dart';
 import 'music.dart';
 import 'settings.dart';
 
-final GlobalKey<NavigatorState> firstTabNavKey = GlobalKey<NavigatorState>();
-final GlobalKey<NavigatorState> secondTabNavKey = GlobalKey<NavigatorState>();
-final GlobalKey<NavigatorState> thirdTabNavKey = GlobalKey<NavigatorState>();
+GlobalKey<NavigatorState> firstTabNavKey = GlobalKey<NavigatorState>();
+GlobalKey<NavigatorState> secondTabNavKey = GlobalKey<NavigatorState>();
+GlobalKey<NavigatorState> thirdTabNavKey = GlobalKey<NavigatorState>();
 
 void main() => runApp(Flip());
 

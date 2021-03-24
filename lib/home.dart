@@ -9,7 +9,8 @@ class FirstTab extends StatelessWidget {
           slivers: [
             CupertinoSliverNavigationBar(
               largeTitle: Text('Home', style: TextStyle(color:
-                Color.fromRGBO(216, 171, 76, 1),)),
+                Color.fromRGBO(216, 171, 76, 1),)
+              ),
             ),
           ],
         )

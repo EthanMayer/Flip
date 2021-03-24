@@ -5,22 +5,24 @@ class FirstTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        backgroundColor: CupertinoColors.systemGrey.withOpacity(0.8),
-        middle: const Text('Home'),
-        
-      ),
-      child: Container(
-        color: CupertinoColors.systemRed,
-      ),
-      // Column(
-      //     children: <Widget>[
-      //       Container(height: 50, color: CupertinoColors.systemRed),
-      //       Container(height: 50, color: CupertinoColors.systemGreen),
-      //       Container(height: 50, color: CupertinoColors.systemBlue),
-      //       Container(height: 50, color: CupertinoColors.systemYellow),
-      //     ]
-      // )
+        child: CustomScrollView(
+          slivers: [
+            CupertinoSliverNavigationBar(
+              largeTitle: Text('Home', style: TextStyle(color:
+                Color.fromRGBO(216, 171, 76, 1),)),
+            ),
+          ],
+        )
     );
+    // return CupertinoPageScaffold(
+    //   navigationBar: CupertinoNavigationBar(
+    //     backgroundColor: CupertinoColors.systemGrey.withOpacity(0.8),
+    //     middle: const Text('Home'),
+    //
+    //   ),
+    //   child: Container(
+    //     color: CupertinoColors.systemRed,
+    //   ),
+    // );
   }
 }

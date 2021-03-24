@@ -5,22 +5,32 @@ class SecondTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        backgroundColor: CupertinoColors.systemGrey.withOpacity(0.8),
-        middle: const Text('Music'),
-
-      ),
-      child: Container(
-        color: CupertinoColors.systemGreen,
-      ),
-      // Column(
-      //     children: <Widget>[
-      //       Container(height: 50, color: CupertinoColors.systemRed),
-      //       Container(height: 50, color: CupertinoColors.systemGreen),
-      //       Container(height: 50, color: CupertinoColors.systemBlue),
-      //       Container(height: 50, color: CupertinoColors.systemYellow),
-      //     ]
-      // )
+        child: CustomScrollView(
+          slivers: [
+            CupertinoSliverNavigationBar(
+              largeTitle: Text('Music', style: TextStyle(color:
+                Color.fromRGBO(216, 171, 76, 1),)),
+            ),
+            SliverGrid(
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 200.0,
+                mainAxisSpacing: 10.0,
+                crossAxisSpacing: 10.0,
+                childAspectRatio: 3 / 2,
+              ),
+              delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                  return Container(
+                    alignment: Alignment.center,
+                    color: Colors.blue[100 * (index % 9)],
+                    child: Text('Grid Item $index'),
+                  );
+                },
+                childCount: 20,
+              ),
+            ),
+          ],
+        )
     );
   }
 }

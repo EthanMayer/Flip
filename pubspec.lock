@@ -88,6 +88,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
+  pdftron_flutter:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: a734f3ea86470a55556b4ab9450762f7cc1d7fdd
+      url: "git://github.com/PDFTron/pdftron-flutter.git"
+    source: git
+    version: "0.0.31"
   sky_engine:
     dependency: transitive
     description: flutter

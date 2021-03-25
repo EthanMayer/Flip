@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'home.dart';
-import 'music.dart';
-import 'settings.dart';
+import 'home_view.dart';
+import 'music_view.dart';
+import 'settings_view.dart';
 
 GlobalKey<NavigatorState> firstTabNavKey = GlobalKey<NavigatorState>();
 GlobalKey<NavigatorState> secondTabNavKey = GlobalKey<NavigatorState>();
@@ -88,17 +88,17 @@ class _MainPageState extends State<MainPage> {
         if (index == 0) {
           return CupertinoTabView(
             navigatorKey: firstTabNavKey,
-            builder: (BuildContext context) => FirstTab(),
+            builder: (BuildContext context) => HomeView(),
           );
         } else if (index == 1) {
           return CupertinoTabView(
             navigatorKey: secondTabNavKey,
-            builder: (BuildContext context) => SecondTab(),
+            builder: (BuildContext context) => MusicView(),
           );
         } else {
           return CupertinoTabView(
             navigatorKey: thirdTabNavKey,
-            builder: (BuildContext context) => ThirdTab(),
+            builder: (BuildContext context) => SettingsView(),
           );
         }
       },

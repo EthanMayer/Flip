@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'main.dart';
-import 'home_view.dart';
 import 'music_folder_view.dart';
 
 final Color vandyGold = Color.fromRGBO(216, 171, 76, 1);
@@ -40,7 +38,7 @@ class _MusicViewState extends State<MusicView> {
                       Container(
                         alignment: Alignment.center,
                         color: _cellColor,
-                        child: Text('Grid Item $index'),
+                        child: Text('Music Folder $index'),
                       ),
                       GestureDetector(
                         onTap: () {
@@ -57,21 +55,6 @@ class _MusicViewState extends State<MusicView> {
                       )
                     ],
                   );
-                  //   Container(
-                  //   alignment: Alignment.center,
-                  //   color: Color.fromRGBO(216, 171, 76, 1),//blue[100 * (index % 9)],
-                  //   child: Stack(
-                  //       //mainAxisAlignment: MainAxisAlignment.center,
-                  //       children: <Widget>[
-                  //         Text('Grid Item $index'),
-                  //         GestureDetector(
-                  //           onTap: () {
-                  //             Color.fromRGBO(153, 127, 61, 1);
-                  //           }
-                  //         )
-                  //       ]
-                  //   )
-                  // );
                 },
                 //childCount: 20,
               ),

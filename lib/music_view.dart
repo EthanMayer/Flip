@@ -1,7 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'main.dart';
+import 'home_view.dart';
+import 'music_folder_view.dart';
 
-class MusicView extends StatelessWidget {
+final Color vandyGold = Color.fromRGBO(216, 171, 76, 1);
+final Color darkerVandyGold = Color.fromRGBO(153, 127, 61, 1);
+
+class MusicView extends StatefulWidget {
+  @override
+  _MusicViewState createState() => _MusicViewState();
+}
+
+class _MusicViewState extends State<MusicView> {
+
+  Color _cellColor = vandyGold;
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -25,12 +39,20 @@ class MusicView extends StatelessWidget {
                     children: [
                       Container(
                         alignment: Alignment.center,
-                        color: Color.fromRGBO(216, 171, 76, 1),
+                        color: _cellColor,
                         child: Text('Grid Item $index'),
                       ),
                       GestureDetector(
                         onTap: () {
-                          Color.fromRGBO(153, 127, 61, 1);
+                          setState(() {
+                            //_cellColor = darkerVandyGold;
+                            Navigator.push(
+                              context,
+                              CupertinoPageRoute(builder: (context) {
+                                return MusicFolderView();
+                              })
+                            );
+                          });
                         }
                       )
                     ],

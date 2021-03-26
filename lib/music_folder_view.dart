@@ -44,12 +44,7 @@ class _MusicFolderViewState extends State<MusicFolderView> {
                           onTap: () {
                             setState(() {
                               //_cellColor = darkerVandyGold;
-                              Navigator.push(
-                                  context,
-                                  CupertinoPageRoute(builder: (context) {
-                                    return MusicFolderView();
-                                  })
-                              );
+                              PdftronFlutter.openDocument('file:///data/Dynamite/Dynamite_2019-AllParts.pdf');
                             });
                           }
                       )

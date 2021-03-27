@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'home_view.dart';
 import 'music_view.dart';
 import 'settings_view.dart';
+import 'login_view.dart';
 
 GlobalKey<NavigatorState> firstTabNavKey = GlobalKey<NavigatorState>();
 GlobalKey<NavigatorState> secondTabNavKey = GlobalKey<NavigatorState>();
@@ -15,19 +16,19 @@ class Flip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoApp(
-      title: 'Flutter Demo',
+      title: 'Flip',
       theme: CupertinoThemeData(brightness: Brightness.dark),
-      home: MainPage(title: 'Flip Main Page'),
-      localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
-        DefaultMaterialLocalizations.delegate,
-        DefaultWidgetsLocalizations.delegate,
-      ],
+      home: LoginView(),//MainPage(),
+      // localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
+      //   DefaultMaterialLocalizations.delegate,
+      //   DefaultWidgetsLocalizations.delegate,
+      // ],
     );
   }
 }
 
 class MainPage extends StatefulWidget {
-  MainPage({Key key, this.title}) : super(key: key);
+  MainPage({Key key/*, this.title*/}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -38,7 +39,7 @@ class MainPage extends StatefulWidget {
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
 
-  final String title;
+  //final String title;
 
   @override
   _MainPageState createState() => _MainPageState();
@@ -71,15 +72,15 @@ class _MainPageState extends State<MainPage> {
         activeColor: Color.fromRGBO(216, 171, 76, 1),
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(CupertinoIcons.home),//Icon(Icons.home),
             label: 'Home'
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.queue_music),
+            icon: Icon(CupertinoIcons.music_note_list),//Icon(Icons.queue_music),
             label: 'Music'
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
+            icon: Icon(CupertinoIcons.settings),//Icon(Icons.settings),
             label: 'Settings'
           ),
         ],

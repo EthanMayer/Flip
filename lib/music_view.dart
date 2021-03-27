@@ -6,6 +6,8 @@ final Color vandyGold = Color.fromRGBO(216, 171, 76, 1);
 final Color darkerVandyGold = Color.fromRGBO(153, 127, 61, 1);
 
 class MusicView extends StatefulWidget {
+  MusicView({Key key}) : super(key: key);
+
   @override
   _MusicViewState createState() => _MusicViewState();
 }

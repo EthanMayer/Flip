@@ -6,6 +6,8 @@ final Color vandyGold = Color.fromRGBO(216, 171, 76, 1);
 final Color darkerVandyGold = Color.fromRGBO(153, 127, 61, 1);
 
 class MusicFolderView extends StatefulWidget {
+  MusicFolderView({Key key}) : super(key: key);
+
   @override
   _MusicFolderViewState createState() => _MusicFolderViewState();
 }

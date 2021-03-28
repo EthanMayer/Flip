@@ -19,6 +19,7 @@ class _MusicViewState extends State<MusicView> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
+      child: CupertinoScrollbar( //todo currently this scrollbar does not show up
         child: CustomScrollView(
           slivers: [
             CupertinoSliverNavigationBar(
@@ -63,6 +64,7 @@ class _MusicViewState extends State<MusicView> {
             ),
           ],
         )
+      )
     );
   }
 }

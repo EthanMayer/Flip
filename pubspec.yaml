@@ -26,6 +26,8 @@ dependencies:
   pdftron_flutter:
     git:
       url: git://github.com/PDFTron/pdftron-flutter.git
+  sqflite:
+  path:
 
 
   # The following adds the Cupertino Icons font to your application.

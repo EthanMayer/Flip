@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'music_file_view.dart';
+import 'package:pdftron_flutter/pdftron_flutter.dart';
 
 final Color vandyGold = Color.fromRGBO(216, 171, 76, 1);
 final Color darkerVandyGold = Color.fromRGBO(153, 127, 61, 1);
 
-class MusicFolderView extends StatefulWidget {
-  MusicFolderView({Key key}) : super(key: key);
+class MusicFileView extends StatefulWidget {
+  MusicFileView({Key key}) : super(key: key);
 
   @override
-  _MusicFolderViewState createState() => _MusicFolderViewState();
+  _MusicFileViewState createState() => _MusicFileViewState();
 }
 
-class _MusicFolderViewState extends State<MusicFolderView> {
+class _MusicFileViewState extends State<MusicFileView> {
 
   Color _cellColor = vandyGold;
 
@@ -22,10 +22,10 @@ class _MusicFolderViewState extends State<MusicFolderView> {
         child: CustomScrollView(
           slivers: [
             CupertinoSliverNavigationBar(
-              largeTitle: Text('Music Folders', style: TextStyle(color:
+              largeTitle: Text('Music Files', style: TextStyle(color:
               Color.fromRGBO(216, 171, 76, 1),)
               ),
-              previousPageTitle: 'Music',
+              previousPageTitle: 'Music Folders',
             ),
             SliverGrid(
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
@@ -41,18 +41,13 @@ class _MusicFolderViewState extends State<MusicFolderView> {
                       Container(
                         alignment: Alignment.center,
                         color: _cellColor,
-                        child: Text('Instrument Folder $index'),
+                        child: Text('Music PDF $index'),
                       ),
                       GestureDetector(
                           onTap: () {
                             setState(() {
                               //_cellColor = darkerVandyGold;
-                              Navigator.push(
-                                  context,
-                                  CupertinoPageRoute(builder: (context) {
-                                    return MusicFileView();
-                                  })
-                              );
+                              PdftronFlutter.openDocument('file:///data/Dynamite/Dynamite_2019-AllParts.pdf');
                             });
                           }
                       )

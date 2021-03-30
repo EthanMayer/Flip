@@ -45,7 +45,7 @@ class _MusicFolderViewState extends State<MusicFolderView> {
                       ),
                       GestureDetector(
                           onTap: () {
-                            setState(() {
+                            //setState(() {
                               //_cellColor = darkerVandyGold;
                               Navigator.push(
                                   context,
@@ -53,13 +53,13 @@ class _MusicFolderViewState extends State<MusicFolderView> {
                                     return MusicFileView();
                                   })
                               );
-                            });
+                            //});
                           }
                       )
                     ],
                   );
                 },
-                childCount: 3,
+                childCount: 4,
               ),
             ),
           ],

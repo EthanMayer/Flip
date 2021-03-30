@@ -41,20 +41,20 @@ class _MusicFileViewState extends State<MusicFileView> {
                       Container(
                         alignment: Alignment.center,
                         color: _cellColor,
-                        child: Text('Music PDF $index'),
+                        child: Text('Instrument Part $index PDF'),
                       ),
                       GestureDetector(
                           onTap: () {
-                            setState(() {
+                            //setState(() {
                               //_cellColor = darkerVandyGold;
                               PdftronFlutter.openDocument('file:///data/Dynamite/Dynamite_2019-AllParts.pdf');
-                            });
+                            //});
                           }
                       )
                     ],
                   );
                 },
-                childCount: 3,
+                childCount: 2,
               ),
             ),
           ],

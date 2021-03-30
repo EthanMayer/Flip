@@ -25,6 +25,9 @@ class _MusicViewState extends State<MusicView> {
               largeTitle: Text('Music', style: TextStyle(color:
                 Color.fromRGBO(216, 171, 76, 1))
               ),
+              middle: CupertinoSearchTextField(
+
+              ),
             ),
             SliverGrid(
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
@@ -44,7 +47,7 @@ class _MusicViewState extends State<MusicView> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          setState(() {
+                          //setState(() {
                             //_cellColor = darkerVandyGold;
                             Navigator.push(
                               context,
@@ -52,7 +55,7 @@ class _MusicViewState extends State<MusicView> {
                                 return MusicFolderView();
                               })
                             );
-                          });
+                          //});
                         }
                       )
                     ],

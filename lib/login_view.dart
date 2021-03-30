@@ -8,6 +8,9 @@ class LoginView extends StatefulWidget {
   _LoginViewState createState() => _LoginViewState();
 }
 
+String password = "";
+String CORRECT_PASSWORD = "vandy";
+
 class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
@@ -35,32 +38,14 @@ class _LoginViewState extends State<LoginView> {
             ),
             Padding(
               padding: const EdgeInsets.only(
-                  left: 30.0, right: 30.0, top: 50.0, bottom: 0),
-              child: CupertinoTextField(
-                placeholder: 'Username',
-                placeholderStyle: TextStyle(
-                  color: CupertinoColors.systemGrey,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20
-                ),
-                style: TextStyle(
-                    color: CupertinoColors.black,
-                    fontSize: 20
-                ),
-                padding: const EdgeInsets.only(
-                  left: 10.0, right: 0.0, top: 15.0, bottom: 15.0),
-                decoration: BoxDecoration(
-                  color: CupertinoColors.white,
-                  borderRadius: BorderRadius.circular(25.0),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 30.0, right: 30.0, top: 25.0, bottom: 0),
+                  left: 40.0, right: 40.0, top: 55.0, bottom: 0),
               child: CupertinoTextField(
                 placeholder: 'Password',
                 obscureText: true,
+                textAlign: TextAlign.center,
+                onChanged: (text) {
+                  password = text;
+                },
                 placeholderStyle: TextStyle(
                     color: CupertinoColors.systemGrey,
                     fontWeight: FontWeight.bold,
@@ -71,7 +56,7 @@ class _LoginViewState extends State<LoginView> {
                     fontSize: 20
                 ),
                 padding: const EdgeInsets.only(
-                    left: 10.0, right: 0.0, top: 15.0, bottom: 15.0),
+                    left: 0.0, right: 0.0, top: 15.0, bottom: 15.0),
                 decoration: BoxDecoration(
                   color: CupertinoColors.white,
                   borderRadius: BorderRadius.circular(25.0),
@@ -90,9 +75,13 @@ class _LoginViewState extends State<LoginView> {
                       fontWeight: FontWeight.bold),
                 ),
                 onPressed: () {
-                  Navigator.pushReplacement(
-                      context, CupertinoPageRoute(builder: (_) => MainPage()
-                  ));
+                  if(password == CORRECT_PASSWORD) {
+                    Navigator.pushReplacement(
+                        context, CupertinoPageRoute(builder: (_) => MainPage()
+                    ));
+                  } else {
+                    _showDialog(context);
+                  }
                 },
                 borderRadius: BorderRadius.circular(25.0),
                 color: Color.fromRGBO(216, 171, 76, 1),
@@ -103,4 +92,26 @@ class _LoginViewState extends State<LoginView> {
       ),
     );
   }
+}
+
+
+_showDialog(BuildContext context) {
+  CupertinoAlertDialog alert = CupertinoAlertDialog(
+    content: Text('Error 404'),
+    actions: [
+      CupertinoDialogAction(
+        child: Text('OK'),
+        onPressed: () {
+          Navigator.pop(context);
+        },
+      ),
+    ],
+  );
+
+  return showCupertinoDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

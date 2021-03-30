@@ -47,7 +47,7 @@ class _MusicFileViewState extends State<MusicFileView> {
                           onTap: () {
                             //setState(() {
                               //_cellColor = darkerVandyGold;
-                              PdftronFlutter.openDocument('file:///data/Dynamite/Dynamite_2019-AllParts.pdf');
+                              PdftronFlutter.openDocument("https://pdftron.s3.amazonaws.com/downloads/pdfref.pdf");
                             //});
                           }
                       )

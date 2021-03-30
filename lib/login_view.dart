@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'home_view.dart';
 import 'main.dart';
+import 'account_view.dart';
 
 class LoginView extends StatefulWidget {
   @override
@@ -61,6 +62,15 @@ class _LoginViewState extends State<LoginView> {
                   color: CupertinoColors.white,
                   borderRadius: BorderRadius.circular(25.0),
                 ),
+                onSubmitted: (text) {
+                  if(text == CORRECT_PASSWORD) {
+                    Navigator.pushReplacement(
+                        context, CupertinoPageRoute(builder: (_) => AccountView()
+                    ));
+                  } else {
+                    _showDialog(context);
+                  }
+                },
               ),
             ),
             Padding(
@@ -77,7 +87,7 @@ class _LoginViewState extends State<LoginView> {
                 onPressed: () {
                   if(password == CORRECT_PASSWORD) {
                     Navigator.pushReplacement(
-                        context, CupertinoPageRoute(builder: (_) => MainPage()
+                        context, CupertinoPageRoute(builder: (_) => AccountView()
                     ));
                   } else {
                     _showDialog(context);
@@ -97,7 +107,7 @@ class _LoginViewState extends State<LoginView> {
 
 _showDialog(BuildContext context) {
   CupertinoAlertDialog alert = CupertinoAlertDialog(
-    content: Text('Error 404'),
+    content: Text('Error: Incorrect Password'),
     actions: [
       CupertinoDialogAction(
         child: Text('OK'),

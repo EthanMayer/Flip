@@ -26,9 +26,9 @@ class _MusicViewState extends State<MusicView> {
               largeTitle: Text('Music', style: TextStyle(color:
                 Color.fromRGBO(216, 171, 76, 1))
               ),
-              middle: CupertinoSearchTextField(
-
-              ),
+              // middle: CupertinoSearchTextField(
+              // TODO: Fix search bar
+              // ),
             ),
             SliverGrid(
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(

@@ -23,6 +23,7 @@ class _AccountViewState extends State<AccountView> {
                 //fontWeight: FontWeight.bold),
               ),
             ),
+            padding: EdgeInsets.all(10),
             onPressed: () {
               Navigator.pushReplacement(
                   context, CupertinoPageRoute(builder: (_) => MainPage()
@@ -35,28 +36,29 @@ class _AccountViewState extends State<AccountView> {
                 color: CupertinoColors.systemBlue,
                 //fontSize: 25,
                 //fontWeight: FontWeight.bold),
+            ),
           ),
+          padding: EdgeInsets.all(10),
+          onPressed: () {
+            Navigator.pushReplacement(
+                context, CupertinoPageRoute(builder: (_) => MainPage()
+            ));
+          }),
         ),
-        onPressed: () {
-          Navigator.pushReplacement(
-              context, CupertinoPageRoute(builder: (_) => MainPage()
-          ));
-        }),
-      ),
         child: SingleChildScrollView(
           child: Column(
               children: <Widget>[
+                // Padding(
+                //     padding: const EdgeInsets.only(top: 80.0),
+                //     child: Center(
+                //         child: Text(
+                //           'Account',
+                //           style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),
+                //         )
+                //     )
+                // ),
                 Padding(
-                    padding: const EdgeInsets.only(top: 60.0),
-                    child: Center(
-                        child: Text(
-                          'Flip',
-                          style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),
-                        )
-                    )
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 50.0),
+                  padding: const EdgeInsets.only(top: 90.0),
                   child: Center(
                     child: Container(
                         width: 200,
@@ -68,7 +70,7 @@ class _AccountViewState extends State<AccountView> {
                   padding: const EdgeInsets.only(
                       left: 30.0, right: 30.0, top: 50.0, bottom: 0),
                   child: CupertinoTextField(
-                    placeholder: 'Username',
+                    placeholder: 'Name',
                     placeholderStyle: TextStyle(
                         color: CupertinoColors.systemGrey,
                         fontWeight: FontWeight.bold,
@@ -90,7 +92,7 @@ class _AccountViewState extends State<AccountView> {
                   padding: const EdgeInsets.only(
                       left: 30.0, right: 30.0, top: 25.0, bottom: 0),
                   child: CupertinoTextField(
-                    placeholder: 'Password',
+                    placeholder: 'University',
                     obscureText: true,
                     placeholderStyle: TextStyle(
                         color: CupertinoColors.systemGrey,
@@ -112,23 +114,72 @@ class _AccountViewState extends State<AccountView> {
                 Padding(
                   padding: const EdgeInsets.only(
                       left: 30.0, right: 30.0, top: 25.0, bottom: 0),
-                  child: CupertinoButton(
-                    child: Text(
-                      'Login',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold),
+                  child: CupertinoTextField(
+                    placeholder: 'Instrument',
+                    obscureText: true,
+                    placeholderStyle: TextStyle(
+                        color: CupertinoColors.systemGrey,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20
                     ),
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                          context, CupertinoPageRoute(builder: (_) => MainPage()
-                      ));
-                    },
-                    borderRadius: BorderRadius.circular(25.0),
-                    color: Color.fromRGBO(216, 171, 76, 1),
+                    style: TextStyle(
+                        color: CupertinoColors.black,
+                        fontSize: 20
+                    ),
+                    padding: const EdgeInsets.only(
+                        left: 10.0, right: 0.0, top: 15.0, bottom: 15.0),
+                    decoration: BoxDecoration(
+                      color: CupertinoColors.white,
+                      borderRadius: BorderRadius.circular(25.0),
+                    ),
                   ),
-                )
+                ),
+                // Padding( TODO: Modal picker for instruments
+                //   padding: const EdgeInsets.only(
+                //       left: 30.0, right: 30.0, top: 25.0, bottom: 0),
+                //   child: CupertinoButton(
+                //     child: CupertinoPicker(
+                //       onSelectedItemChanged: (int index) {
+                //         setState(() {
+                //           //selectedValue = index;
+                //         });
+                //       },
+                //       backgroundColor: CupertinoColors.systemGrey,
+                //       children: <Widget>[
+                //         Text('Trombone'),
+                //         Text('Trumpet'),
+                //       ],
+                //       itemExtent: 50.0,
+                //     ),
+                //     // onPressed: () {
+                //     //   Navigator.pushReplacement(
+                //     //       context, CupertinoPageRoute(builder: (_) => MainPage()
+                //     //   ));
+                //     //},
+                //     borderRadius: BorderRadius.circular(25.0),
+                //     color: Color.fromRGBO(216, 171, 76, 1),
+                //   ),
+                // ),
+                // Padding(
+                //   padding: const EdgeInsets.only(
+                //       left: 30.0, right: 30.0, top: 25.0, bottom: 0),
+                //   child: CupertinoButton(
+                //     child: Text(
+                //       'Login',
+                //       style: TextStyle(
+                //           color: Colors.white,
+                //           fontSize: 25,
+                //           fontWeight: FontWeight.bold),
+                //     ),
+                //     onPressed: () {
+                //       Navigator.pushReplacement(
+                //           context, CupertinoPageRoute(builder: (_) => MainPage()
+                //       ));
+                //     },
+                //     borderRadius: BorderRadius.circular(25.0),
+                //     color: Color.fromRGBO(216, 171, 76, 1),
+                //   ),
+                // )
               ]
           )
         )

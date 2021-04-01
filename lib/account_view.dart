@@ -26,9 +26,7 @@ class _AccountViewState extends State<AccountView> {
             ),
             padding: EdgeInsets.all(10),
             onPressed: () {
-              Navigator.pop(
-                  context//, CupertinoPageRoute(builder: (_) => LoginView()
-              );
+              Navigator.of(context).maybePop();
             }),
         trailing: CupertinoButton(
           child: Text(

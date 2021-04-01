@@ -2,6 +2,7 @@ import 'package:flip/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'tab_view.dart';
+import 'styles.dart';
 
 class AccountView extends StatefulWidget {
   @override
@@ -71,15 +72,8 @@ class _AccountViewState extends State<AccountView> {
                       left: 30.0, right: 30.0, top: 50.0, bottom: 0),
                   child: CupertinoTextField(
                     placeholder: 'Name',
-                    placeholderStyle: TextStyle(
-                        color: CupertinoColors.systemGrey,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20
-                    ),
-                    style: TextStyle(
-                        color: CupertinoColors.black,
-                        fontSize: 20
-                    ),
+                    placeholderStyle: Styles.textRowPlaceholder,
+                    style: Styles.textRowPlaceholder,
                     padding: const EdgeInsets.only(
                         left: 10.0, right: 0.0, top: 15.0, bottom: 15.0),
                     decoration: BoxDecoration(
@@ -94,15 +88,8 @@ class _AccountViewState extends State<AccountView> {
                   child: CupertinoTextField(
                     placeholder: 'University',
                     obscureText: true,
-                    placeholderStyle: TextStyle(
-                        color: CupertinoColors.systemGrey,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20
-                    ),
-                    style: TextStyle(
-                        color: CupertinoColors.black,
-                        fontSize: 20
-                    ),
+                    placeholderStyle: Styles.textRowPlaceholder,
+                    style: Styles.textRowPlaceholder,
                     padding: const EdgeInsets.only(
                         left: 10.0, right: 0.0, top: 15.0, bottom: 15.0),
                     decoration: BoxDecoration(
@@ -117,15 +104,8 @@ class _AccountViewState extends State<AccountView> {
                   child: CupertinoTextField(
                     placeholder: 'Instrument',
                     obscureText: true,
-                    placeholderStyle: TextStyle(
-                        color: CupertinoColors.systemGrey,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20
-                    ),
-                    style: TextStyle(
-                        color: CupertinoColors.black,
-                        fontSize: 20
-                    ),
+                    placeholderStyle: Styles.textRowPlaceholder,
+                    style: Styles.textRowPlaceholder,
                     padding: const EdgeInsets.only(
                         left: 10.0, right: 0.0, top: 15.0, bottom: 15.0),
                     decoration: BoxDecoration(

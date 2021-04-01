@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'music_folder_view.dart';
+import 'styles.dart';
 
 final Color vandyGold = Color.fromRGBO(216, 171, 76, 1);
 final Color darkerVandyGold = Color.fromRGBO(153, 127, 61, 1);
@@ -24,7 +25,7 @@ class _MusicViewState extends State<MusicView> {
           slivers: [
             CupertinoSliverNavigationBar(
               largeTitle: Text('Music', style: TextStyle(color:
-                Color.fromRGBO(216, 171, 76, 1))
+              Styles.gold)
               ),
               // middle: CupertinoSearchTextField(
               // TODO: Fix search bar

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:pdftron_flutter/pdftron_flutter.dart';
+import 'styles.dart';
 
-final Color vandyGold = Color.fromRGBO(216, 171, 76, 1);
 final Color darkerVandyGold = Color.fromRGBO(153, 127, 61, 1);
 
 class MusicFileView extends StatefulWidget {
@@ -13,9 +13,6 @@ class MusicFileView extends StatefulWidget {
 }
 
 class _MusicFileViewState extends State<MusicFileView> {
-
-  Color _cellColor = vandyGold;
-
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -23,7 +20,7 @@ class _MusicFileViewState extends State<MusicFileView> {
           slivers: [
             CupertinoSliverNavigationBar(
               largeTitle: Text('Music Files', style: TextStyle(color:
-              Color.fromRGBO(216, 171, 76, 1),)
+              Styles.gold)
               ),
               previousPageTitle: 'Music Folders',
             ),
@@ -40,7 +37,7 @@ class _MusicFileViewState extends State<MusicFileView> {
                     children: [
                       Container(
                         alignment: Alignment.center,
-                        color: _cellColor,
+                        color: Styles.gold,
                         child: Text('Instrument Part $index PDF'),
                       ),
                       GestureDetector(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'music_file_view.dart';
+import 'styles.dart';
 
-final Color vandyGold = Color.fromRGBO(216, 171, 76, 1);
 final Color darkerVandyGold = Color.fromRGBO(153, 127, 61, 1);
 
 class MusicFolderView extends StatefulWidget {
@@ -13,9 +13,6 @@ class MusicFolderView extends StatefulWidget {
 }
 
 class _MusicFolderViewState extends State<MusicFolderView> {
-
-  Color _cellColor = vandyGold;
-
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -23,7 +20,7 @@ class _MusicFolderViewState extends State<MusicFolderView> {
           slivers: [
             CupertinoSliverNavigationBar(
               largeTitle: Text('Music Folders', style: TextStyle(color:
-              Color.fromRGBO(216, 171, 76, 1),)
+              Styles.gold)
               ),
               previousPageTitle: 'Music',
             ),
@@ -40,7 +37,7 @@ class _MusicFolderViewState extends State<MusicFolderView> {
                     children: [
                       Container(
                         alignment: Alignment.center,
-                        color: _cellColor,
+                        color: Styles.gold,
                         child: Text('Instrument Folder $index'),
                       ),
                       GestureDetector(

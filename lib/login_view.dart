@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'account_view.dart';
+import 'styles.dart';
 
 const String CORRECT_PASSWORD = "vandy";
 
@@ -49,15 +50,8 @@ class _LoginViewState extends State<LoginView> {
                 onChanged: (text) {
                   password = text;
                 },
-                placeholderStyle: TextStyle(
-                    color: CupertinoColors.systemGrey,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20
-                ),
-                style: TextStyle(
-                    color: CupertinoColors.black,
-                    fontSize: 20
-                ),
+                placeholderStyle: Styles.textRowPlaceholder,
+                style: Styles.textRowPlaceholder,
                 padding: const EdgeInsets.only(
                     left: 0.0, right: 0.0, top: 15.0, bottom: 15.0),
                 decoration: BoxDecoration(
@@ -96,7 +90,7 @@ class _LoginViewState extends State<LoginView> {
                   }
                 },
                 borderRadius: BorderRadius.circular(25.0),
-                color: Color.fromRGBO(216, 171, 76, 1),
+                color: Styles.gold,
               ),
             )
           ],

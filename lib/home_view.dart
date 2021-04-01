@@ -15,15 +15,5 @@ class HomeView extends StatelessWidget {
           ],
         )
     );
-    // return CupertinoPageScaffold(
-    //   navigationBar: CupertinoNavigationBar(
-    //     backgroundColor: CupertinoColors.systemGrey.withOpacity(0.8),
-    //     middle: const Text('Home'),
-    //
-    //   ),
-    //   child: Container(
-    //     color: CupertinoColors.systemRed,
-    //   ),
-    // );
   }
 }

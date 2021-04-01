@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'home_view.dart';
-import 'main.dart';
 import 'account_view.dart';
 
+const String CORRECT_PASSWORD = "vandy";
+
 class LoginView extends StatefulWidget {
+  LoginView({Key key}) : super(key: key);
+
   @override
   _LoginViewState createState() => _LoginViewState();
 }
 
-String password = "";
-String CORRECT_PASSWORD = "vandy";
-
 class _LoginViewState extends State<LoginView> {
+
+  String password = "";
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -64,7 +66,7 @@ class _LoginViewState extends State<LoginView> {
                 ),
                 onSubmitted: (text) {
                   if(text == CORRECT_PASSWORD) {
-                    Navigator.pushReplacement(
+                    Navigator.push(
                         context, CupertinoPageRoute(builder: (_) => AccountView()
                     ));
                   } else {

@@ -1,7 +1,7 @@
+import 'package:flip/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'home_view.dart';
-import 'main.dart';
+import 'tab_view.dart';
 
 class AccountView extends StatefulWidget {
   @override
@@ -25,8 +25,8 @@ class _AccountViewState extends State<AccountView> {
             ),
             padding: EdgeInsets.all(10),
             onPressed: () {
-              Navigator.pushReplacement(
-                  context, CupertinoPageRoute(builder: (_) => MainPage()
+              Navigator.pop(
+                  context, CupertinoPageRoute(builder: (_) => LoginView()
               ));
             }),
         trailing: CupertinoButton(
@@ -41,7 +41,7 @@ class _AccountViewState extends State<AccountView> {
           padding: EdgeInsets.all(10),
           onPressed: () {
             Navigator.pushReplacement(
-                context, CupertinoPageRoute(builder: (_) => MainPage()
+                context, CupertinoPageRoute(builder: (_) => TabView()
             ));
           }),
         ),

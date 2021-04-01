@@ -31,12 +31,15 @@ class _MusicViewState extends State<MusicView> {
               // TODO: Fix search bar
               // ),
             ),
+            SliverPadding(
+              padding: const EdgeInsets.only(top: 5.0),
+            ),
             SliverGrid(
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 200.0,
                 mainAxisSpacing: 10.0,
-                crossAxisSpacing: 10.0,
-                childAspectRatio: 3 / 2,
+                crossAxisSpacing: 30.0,
+                childAspectRatio: 3 / 3,
               ),
               delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
@@ -44,8 +47,20 @@ class _MusicViewState extends State<MusicView> {
                     children: [
                       Container(
                         alignment: Alignment.center,
-                        color: _cellColor,
-                        child: Text('Music Folder $index'),
+                        //color: _cellColor,
+                        decoration: BoxDecoration(
+                          image:
+                          DecorationImage(
+                            image: AssetImage(
+                              'assets/images/folder_white.png'
+                            ),
+                            fit: BoxFit.none,
+                          )
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 160.0),
+                          child: Text('Music Folder $index'),
+                        )
                       ),
                       GestureDetector(
                         onTap: () {

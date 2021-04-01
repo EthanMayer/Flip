@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 abstract class Styles {
   static const Color gold = Color.fromRGBO(216, 171, 76, 1);
 
+  static const Color systemBlue = CupertinoColors.systemBlue;
+
   static const TextStyle textRowPlaceholder = TextStyle(
       color: CupertinoColors.systemGrey,
       fontWeight: FontWeight.bold,

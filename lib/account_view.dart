@@ -19,7 +19,7 @@ class _AccountViewState extends State<AccountView> {
             child: Text(
               'Cancel',
               style: TextStyle(
-                color: CupertinoColors.systemBlue,
+                color: Styles.systemBlue,
                 //fontSize: 25,
                 //fontWeight: FontWeight.bold),
               ),
@@ -27,14 +27,14 @@ class _AccountViewState extends State<AccountView> {
             padding: EdgeInsets.all(10),
             onPressed: () {
               Navigator.pop(
-                  context, CupertinoPageRoute(builder: (_) => LoginView()
-              ));
+                  context//, CupertinoPageRoute(builder: (_) => LoginView()
+              );
             }),
         trailing: CupertinoButton(
           child: Text(
             'Done',
             style: TextStyle(
-                color: CupertinoColors.systemBlue,
+                color: Styles.systemBlue,
                 //fontSize: 25,
                 //fontWeight: FontWeight.bold),
             ),

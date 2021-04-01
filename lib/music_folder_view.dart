@@ -19,26 +19,41 @@ class _MusicFolderViewState extends State<MusicFolderView> {
         child: CustomScrollView(
           slivers: [
             CupertinoSliverNavigationBar(
-              largeTitle: Text('Music Folders', style: TextStyle(color:
+              largeTitle: Text('Instruments', style: TextStyle(color:
               Styles.gold)
               ),
               previousPageTitle: 'Music',
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.only(top: 5.0),
             ),
             SliverGrid(
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 200.0,
                 mainAxisSpacing: 10.0,
-                crossAxisSpacing: 10.0,
-                childAspectRatio: 3 / 2,
+                crossAxisSpacing: 30.0,
+                childAspectRatio: 3 / 3,
               ),
               delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
                   return Stack(
                     children: [
                       Container(
-                        alignment: Alignment.center,
-                        color: Styles.gold,
-                        child: Text('Instrument Folder $index'),
+                          alignment: Alignment.center,
+                          //color: _cellColor,
+                          decoration: BoxDecoration(
+                              image:
+                              DecorationImage(
+                                image: AssetImage(
+                                    'assets/images/folder_white.png'
+                                ),
+                                fit: BoxFit.none,
+                              )
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 160.0),
+                            child: Text('Instrument Folder $index'),
+                          )
                       ),
                       GestureDetector(
                           onTap: () {

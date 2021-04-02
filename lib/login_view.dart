@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'account_view.dart';
 import 'styles.dart';
+import 'tab_view.dart';
 
 const String CORRECT_PASSWORD = "vandy";
 
@@ -15,6 +17,22 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
 
   String password = "";
+  bool firstLaunch = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _setup();
+  }
+
+  _setup() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    firstLaunch = prefs.getBool('firstLaunch') ?? true;
+    if (firstLaunch) {
+      prefs.setBool('firstLaunch', false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,9 +78,15 @@ class _LoginViewState extends State<LoginView> {
                 ),
                 onSubmitted: (text) {
                   if(text == CORRECT_PASSWORD) {
-                    Navigator.push(
-                        context, CupertinoPageRoute(builder: (_) => AccountView()
-                    ));
+                    if (firstLaunch) {
+                      Navigator.push(
+                          context, CupertinoPageRoute(builder: (_) => AccountView()
+                      ));
+                    } else {
+                      Navigator.pushReplacement(
+                          context, CupertinoPageRoute(builder: (_) => TabView()
+                      ));
+                    }
                   } else {
                     _showDialog(context);
                   }
@@ -82,9 +106,15 @@ class _LoginViewState extends State<LoginView> {
                 ),
                 onPressed: () {
                   if(password == CORRECT_PASSWORD) {
-                    Navigator.pushReplacement(
-                        context, CupertinoPageRoute(builder: (_) => AccountView()
-                    ));
+                    if (firstLaunch) {
+                      Navigator.push(
+                          context, CupertinoPageRoute(builder: (_) => AccountView()
+                      ));
+                    } else {
+                      Navigator.pushReplacement(
+                          context, CupertinoPageRoute(builder: (_) => TabView()
+                      ));
+                    }
                   } else {
                     _showDialog(context);
                   }

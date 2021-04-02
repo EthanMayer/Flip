@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'home_view.dart';
 import 'music_view.dart';
-import 'settings_view.dart';
+import 'drill_view.dart';
 
 GlobalKey<NavigatorState> firstTabNavKey = GlobalKey<NavigatorState>();
 GlobalKey<NavigatorState> secondTabNavKey = GlobalKey<NavigatorState>();
@@ -31,8 +31,8 @@ class _TabViewState extends State<TabView> {
               label: 'Music'
           ),
           BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.settings),//Icon(Icons.settings),
-              label: 'Settings'
+              icon: Icon(CupertinoIcons.circle_grid_3x3),//Icon(Icons.settings),
+              label: 'Drill'
           ),
         ],
       ),
@@ -50,7 +50,7 @@ class _TabViewState extends State<TabView> {
         } else {
           return CupertinoTabView(
             navigatorKey: thirdTabNavKey,
-            builder: (BuildContext context) => SettingsView(),
+            builder: (BuildContext context) => DrillView(),
           );
         }
       },

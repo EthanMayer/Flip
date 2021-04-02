@@ -16,8 +16,8 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
 
-  String password = "";
-  bool firstLaunch = false;
+  String _password = "";
+  bool _firstLaunch = false;
 
   @override
   void initState() {
@@ -28,8 +28,8 @@ class _LoginViewState extends State<LoginView> {
   _setup() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    firstLaunch = prefs.getBool('firstLaunch') ?? true;
-    if (firstLaunch) {
+    _firstLaunch = prefs.getBool('firstLaunch') ?? true;
+    if (_firstLaunch) {
       prefs.setBool('firstLaunch', false);
     }
   }
@@ -65,9 +65,9 @@ class _LoginViewState extends State<LoginView> {
                 placeholder: 'Password',
                 obscureText: true,
                 textAlign: TextAlign.center,
-                onChanged: (text) {
-                  password = text;
-                },
+                // onChanged: (text) {
+                //   password = text;
+                // },
                 placeholderStyle: Styles.textRowPlaceholder,
                 style: Styles.textRowPlaceholder,
                 padding: const EdgeInsets.only(
@@ -77,8 +77,9 @@ class _LoginViewState extends State<LoginView> {
                   borderRadius: BorderRadius.circular(25.0),
                 ),
                 onSubmitted: (text) {
+                  _password = text;
                   if(text == CORRECT_PASSWORD) {
-                    if (firstLaunch) {
+                    if (_firstLaunch) {
                       Navigator.push(
                           context, CupertinoPageRoute(builder: (_) => AccountView()
                       ));
@@ -105,8 +106,8 @@ class _LoginViewState extends State<LoginView> {
                       fontWeight: FontWeight.bold),
                 ),
                 onPressed: () {
-                  if(password == CORRECT_PASSWORD) {
-                    if (firstLaunch) {
+                  if(_password == CORRECT_PASSWORD) {
+                    if (_firstLaunch) {
                       Navigator.push(
                           context, CupertinoPageRoute(builder: (_) => AccountView()
                       ));

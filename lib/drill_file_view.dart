@@ -16,9 +16,11 @@ class DrillFileView extends StatelessWidget {
               slivers: [
                 // Navigation bar at the top of the screen that contains the view title and navigation buttons.
                 CupertinoSliverNavigationBar(
-                  largeTitle: Text('Drill', style: TextStyle(color:
-                  Styles.gold,)
+                  largeTitle: Text(
+                      'Drill',
+                      style: TextStyle(color: Styles.gold,)
                   ),
+                  previousPageTitle: 'Shows',
                 ),
                 SliverPadding(
                   padding: const EdgeInsets.only(top: 5.0),

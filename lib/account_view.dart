@@ -1,4 +1,3 @@
-import 'package:flip/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,6 +16,7 @@ class AccountView extends StatefulWidget {
 /// Creates and manages the Account screen.
 class _AccountViewState extends State<AccountView> {
 
+  // Variables to keep a local copy of data.
   String _name;
   String _university = "University";
   String _instrument = "Instrument";
@@ -97,7 +97,7 @@ class _AccountViewState extends State<AccountView> {
               child: CupertinoPicker(
                 backgroundColor: Color.fromRGBO(255, 255, 255, 1),
                 onSelectedItemChanged: (value) {
-                  // Called to refresh the UI to change the university text value
+                  // Called to refresh the UI to change the university text value.
                   setState(() {
                     _university = _universityList[value].data;
                     _updateUniversity();

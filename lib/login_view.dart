@@ -5,26 +5,32 @@ import 'account_view.dart';
 import 'styles.dart';
 import 'tab_view.dart';
 
+// The correct login password.
 const String CORRECT_PASSWORD = "vandy";
 
+/// Manages dynamic state for the Login class.
 class LoginView extends StatefulWidget {
   LoginView({Key key}) : super(key: key);
 
+  /// Creates the dynamic state for the Login class.
   @override
   _LoginViewState createState() => _LoginViewState();
 }
 
+/// Creates and manages the Login screen.
 class _LoginViewState extends State<LoginView> {
 
   String _password = "";
-  bool _firstLaunch = false;
+  bool _firstLaunch = false; // First time launching the app?
 
+  /// Called on view load to initialize the view.
   @override
   void initState() {
     super.initState();
     _setup();
   }
 
+  /// Asynchronously access the phone preferences on view load to grab data.
   _setup() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -34,12 +40,53 @@ class _LoginViewState extends State<LoginView> {
     }
   }
 
+  /// Validate password when submitted to determine which view to load.
+  _validatePassword() {
+    if(_password == CORRECT_PASSWORD) {
+      if (_firstLaunch) {
+        Navigator.push(
+            context, CupertinoPageRoute(builder: (_) => AccountView()
+        ));
+      } else {
+        Navigator.pushReplacement(
+            context, CupertinoPageRoute(builder: (_) => TabView()
+        ));
+      }
+    } else {
+      _showDialog(context);
+    }
+  }
+
+  /// Shows a pop up error box when the incorrect password is entered.
+  _showDialog(BuildContext context) {
+    CupertinoAlertDialog alert = CupertinoAlertDialog(
+      content: Text('Error: Incorrect Password'),
+      actions: [
+        CupertinoDialogAction(
+          child: Text('OK'),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ],
+    );
+
+    return showCupertinoDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  /// Builds the UI using widgets.
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       child: SingleChildScrollView(
         child: Column(
           children: <Widget>[
+            // Create the screen title.
             Padding(
               padding: const EdgeInsets.only(top: 60.0),
               child: Center(
@@ -49,6 +96,7 @@ class _LoginViewState extends State<LoginView> {
                 )
               )
             ),
+            // Create the Star V image.
             Padding(
               padding: const EdgeInsets.only(top: 50.0),
               child: Center(
@@ -58,6 +106,7 @@ class _LoginViewState extends State<LoginView> {
                     child: Image.asset('assets/images/starV_873.png')),
               ),
             ),
+            // Create the password text box.
             Padding(
               padding: const EdgeInsets.only(
                   left: 40.0, right: 40.0, top: 55.0, bottom: 0),
@@ -65,9 +114,6 @@ class _LoginViewState extends State<LoginView> {
                 placeholder: 'Password',
                 obscureText: true,
                 textAlign: TextAlign.center,
-                // onChanged: (text) {
-                //   password = text;
-                // },
                 placeholderStyle: Styles.textRowPlaceholder,
                 style: Styles.textRowPlaceholder,
                 padding: const EdgeInsets.only(
@@ -76,49 +122,25 @@ class _LoginViewState extends State<LoginView> {
                   color: CupertinoColors.white,
                   borderRadius: BorderRadius.circular(25.0),
                 ),
-                onSubmitted: (text) {
+                onChanged: (text) {
                   _password = text;
-                  if(text == CORRECT_PASSWORD) {
-                    if (_firstLaunch) {
-                      Navigator.push(
-                          context, CupertinoPageRoute(builder: (_) => AccountView()
-                      ));
-                    } else {
-                      Navigator.pushReplacement(
-                          context, CupertinoPageRoute(builder: (_) => TabView()
-                      ));
-                    }
-                  } else {
-                    _showDialog(context);
-                  }
+                },
+                onSubmitted: (text) {
+                  _validatePassword();
                 },
               ),
             ),
+            // Create the login button.
             Padding(
               padding: const EdgeInsets.only(
                   left: 30.0, right: 30.0, top: 25.0, bottom: 0),
               child: CupertinoButton(
                 child: Text(
                   'Login',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold),
+                  style: Styles.textButton,
                 ),
                 onPressed: () {
-                  if(_password == CORRECT_PASSWORD) {
-                    if (_firstLaunch) {
-                      Navigator.push(
-                          context, CupertinoPageRoute(builder: (_) => AccountView()
-                      ));
-                    } else {
-                      Navigator.pushReplacement(
-                          context, CupertinoPageRoute(builder: (_) => TabView()
-                      ));
-                    }
-                  } else {
-                    _showDialog(context);
-                  }
+                  _validatePassword();
                 },
                 borderRadius: BorderRadius.circular(25.0),
                 color: Styles.gold,
@@ -129,26 +151,4 @@ class _LoginViewState extends State<LoginView> {
       ),
     );
   }
-}
-
-
-_showDialog(BuildContext context) {
-  CupertinoAlertDialog alert = CupertinoAlertDialog(
-    content: Text('Error: Incorrect Password'),
-    actions: [
-      CupertinoDialogAction(
-        child: Text('OK'),
-        onPressed: () {
-          Navigator.pop(context);
-        },
-      ),
-    ],
-  );
-
-  return showCupertinoDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return alert;
-    },
-  );
 }

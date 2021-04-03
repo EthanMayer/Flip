@@ -184,7 +184,7 @@ class _AccountViewState extends State<AccountView> {
                   padding: const EdgeInsets.only(
                       left: 30.0, right: 30.0, top: 50.0, bottom: 0),
                   child: CupertinoTextField(
-                    placeholder: _name,
+                    placeholder: "Name",
                     placeholderStyle: Styles.textRowPlaceholder,
                     style: Styles.textRowPlaceholder,
                     textAlign: TextAlign.center,

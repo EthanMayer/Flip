@@ -17,7 +17,7 @@ class AccountView extends StatefulWidget {
 class _AccountViewState extends State<AccountView> {
 
   // Variables to keep a local copy of data.
-  String _name;
+  String _name = "Name";
   String _university = "University";
   String _instrument = "Instrument";
 
@@ -34,25 +34,25 @@ class _AccountViewState extends State<AccountView> {
 
   // List of instruments in the marching band.
   List<Text> _instrumentList = const [
-    Text('Bari Saxophone', style: Styles.textRow),
-    Text('Bass Drum', style: Styles.textRow),
+    Text('Piccolo (Flute)', style: Styles.textRow),
     Text('Clarinet', style: Styles.textRow),
-    Text('Color Guard', style: Styles.textRow),
-    Text('Cymbal', style: Styles.textRow),
-    Text('Euphonium/Baritone', style: Styles.textRow),
-    Text('Flute', style: Styles.textRow),
-    Text('Mellophone', style: Styles.textRow),
-    Text('Piccolo', style: Styles.textRow),
-    Text('Saxophone', style: Styles.textRow),
-    Text('Snare Drum', style: Styles.textRow),
-    Text('Sousaphone', style: Styles.textRow),
-    Text('Tenor Drum', style: Styles.textRow),
-    Text('Tenor Saxophone', style: Styles.textRow),
-    Text('Trombone', style: Styles.textRow),
+    Text('Alto Sax', style: Styles.textRow),
+    Text('Tenor Sax', style: Styles.textRow),
+    Text('Bari Sax', style: Styles.textRow),
     Text('Trumpet', style: Styles.textRow),
+    Text('Mellophone', style: Styles.textRow),
+    Text('Trombone', style: Styles.textRow),
+    Text('Euphonium/Baritone (BC)', style: Styles.textRow),
+    Text('Euphonium/Baritone (TC)', style: Styles.textRow),
+    Text('Sousaphone', style: Styles.textRow),
+    Text('Snare Drum', style: Styles.textRow),
+    Text('Bass Drum', style: Styles.textRow),
+    Text('Tenor Drums', style: Styles.textRow),
+    Text('Cymbal', style: Styles.textRow),
+    Text('Color Guard', style: Styles.textRow),
   ];
 
-  /// Called on view load to initialize the view.
+  /// Called on view load to initialize the screen view.
   @override
   void initState() {
     super.initState();
@@ -87,7 +87,7 @@ class _AccountViewState extends State<AccountView> {
     prefs.setString('instrument', _instrument);
   }
 
-  /// Shows a scroll wheel-style picker in a bottom popup for universities
+  /// Shows a scroll wheel-style picker in a bottom popup for universities.
   _showUniversityPicker() {
     showCupertinoModalPopup(
         context: context,
@@ -120,7 +120,7 @@ class _AccountViewState extends State<AccountView> {
             child: CupertinoPicker(
               backgroundColor: Color.fromRGBO(255, 255, 255, 1),
               onSelectedItemChanged: (value) {
-                // Called to refresh the UI to change the instrument text value
+                // Called to refresh the UI to change the instrument text value.
                 setState(() {
                   _instrument = _instrumentList[value].data;
                   _updateInstrument();
@@ -169,7 +169,7 @@ class _AccountViewState extends State<AccountView> {
         child: SingleChildScrollView(
           child: Column(
               children: <Widget>[
-                // Create the Star V image.
+                // Create the Star V image login page.
                 Padding(
                   padding: const EdgeInsets.only(top: 90.0),
                   child: Center(
@@ -219,7 +219,11 @@ class _AccountViewState extends State<AccountView> {
                 // Create the instrument text field/picker.
                 Padding(
                   padding: const EdgeInsets.only(
-                      left: 30.0, right: 30.0, top: 25.0, bottom: 0),
+                      left: 30.0,
+                      right: 30.0,
+                      top: 25.0,
+                      bottom: 0
+                  ),
                   child: CupertinoButton(
                     child: Text(
                       _instrument,

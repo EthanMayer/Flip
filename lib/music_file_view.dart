@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:pdftron_flutter/pdftron_flutter.dart';
+import 'package:flutter_plugin_pdf_viewer/flutter_plugin_pdf_viewer.dart';
 import 'styles.dart';
 
 /// Manages dynamic state for the Music File class.
@@ -14,11 +15,17 @@ class MusicFileView extends StatefulWidget {
 
 /// Creates and manages the Music File screen.
 class _MusicFileViewState extends State<MusicFileView> {
+  PDFDocument doc;
 
   /// Called on view load to initialize the view.
   @override
   void initState() {
     super.initState();
+    _loadFromAssets();
+  }
+
+  void _loadFromAssets() async {
+    doc = await PDFDocument.fromAsset('data/Dynamite/Dynamite_2019-AllParts.pdf');
   }
 
   /// Builds the UI using widgets.
@@ -66,7 +73,17 @@ class _MusicFileViewState extends State<MusicFileView> {
                           ),
                           GestureDetector(
                               onTap: () {
-                                PdftronFlutter.openDocument("https://pdftron.s3.amazonaws.com/downloads/pdfref.pdf");
+                                //Uri pdfPath = Uri.file("data/Dynamite/Dynamite_2019-AllParts.pdf");
+                                //PdftronFlutter.openDocument(pdfPath.toString());
+
+
+                                Navigator.push(
+                                    context,
+                                    CupertinoPageRoute(builder: (context) {
+                                      return PDFViewer(document: doc);
+                                    }
+                                  )
+                                );
                               }
                           )
                         ],

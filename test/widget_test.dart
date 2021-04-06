@@ -15,9 +15,9 @@ import 'package:flip/main.dart';
 
 
 void main() {
-  String NAME = "name";
-  String INSTRUMENT = "inst";
-  String UNIVERSITY = "univ";
+  const String NAME = "name";
+  const String INSTRUMENT = "inst";
+  const String UNIVERSITY = "univ";
 
 
 

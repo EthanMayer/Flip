@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'account_view.dart';
-import 'styles.dart';
+import 'package:flip/utilities/styles.dart';
 import 'tab_view.dart';
 
 // The correct login password.

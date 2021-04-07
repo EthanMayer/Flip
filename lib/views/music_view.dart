@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'music_folder_view.dart';
-import 'styles.dart';
+import 'package:flip/utilities/styles.dart';
 
 /// Manages dynamic state for the Music class.
 class MusicView extends StatelessWidget {

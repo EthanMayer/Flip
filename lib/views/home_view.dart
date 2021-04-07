@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'styles.dart';
+import 'package:flip/utilities/styles.dart';
 import 'login_view.dart';
 import 'account_view.dart';
 

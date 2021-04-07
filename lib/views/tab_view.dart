@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'home_view.dart';
 import 'music_view.dart';
 import 'drill_view.dart';
-import 'styles.dart';
+import 'package:flip/utilities/styles.dart';
 
 // Global keys for the tab bar to navigate to the correct classes.
 GlobalKey<NavigatorState> firstTabNavKey = GlobalKey<NavigatorState>();

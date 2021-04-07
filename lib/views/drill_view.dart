@@ -1,25 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'music_file_view.dart';
-import 'styles.dart';
+import 'package:flip/utilities/styles.dart';
+import 'drill_file_view.dart';
 
-/// Manages dynamic state for the Music Folder class.
-class MusicFolderView extends StatefulWidget {
-  MusicFolderView({Key key}) : super(key: key);
-
-  /// Creates the dynamic state for the Music Folder class.
-  @override
-  _MusicFolderViewState createState() => _MusicFolderViewState();
-}
-
-/// Creates and manages the Music Folder screen.
-class _MusicFolderViewState extends State<MusicFolderView> {
-
-  /// Called on view load to initialize the view.
-  @override
-  void initState() {
-    super.initState();
-  }
+/// Creates and manages the Drill screen.
+class DrillView extends StatelessWidget {
+  DrillView({Key key}) : super(key: key);
 
   /// Builds the UI using widgets.
   @override
@@ -30,10 +16,9 @@ class _MusicFolderViewState extends State<MusicFolderView> {
               slivers: [
                 // Navigation bar at the top of the screen that contains the view title and navigation buttons.
                 CupertinoSliverNavigationBar(
-                  largeTitle: Text('Instruments', style: TextStyle(color:
-                  Styles.gold)
+                  largeTitle: Text('Shows', style: TextStyle(color:
+                  Styles.gold,)
                   ),
-                  previousPageTitle: 'Music',
                 ),
                 SliverPadding(
                   padding: const EdgeInsets.only(top: 5.0),
@@ -60,28 +45,21 @@ class _MusicFolderViewState extends State<MusicFolderView> {
                                   )
                               ),
                               child: Padding(
-                                padding: const EdgeInsets.only(top: 160.0),
-                                child: Text('Instrument Folder $index'),
+                                padding: const EdgeInsets.only(top: 165.0),
+                                child: Text('Show $index Drill'),
                               )
                           ),
                           GestureDetector(
                               onTap: () {
-                                //TODO: object darkens when pressed
-                                //setState(() {
-                                //_cellColor = darkerVandyGold;
                                 Navigator.push(
-                                    context,
-                                    CupertinoPageRoute(builder: (context) {
-                                      return MusicFileView();
-                                    })
-                                );
-                                //});
+                                    context, CupertinoPageRoute(builder: (_) => DrillFileView()
+                                ));
                               }
                           )
                         ],
                       );
                     },
-                    childCount: 4,
+                    childCount: 2,
                   ),
                 ),
               ],

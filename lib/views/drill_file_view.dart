@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:pdftron_flutter/pdftron_flutter.dart';
-import 'styles.dart';
+import 'package:flip/utilities/styles.dart';
 
 /// Creates and manages the Drill File screen.
 class DrillFileView extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'login_view.dart';
+import 'views/login_view.dart';
 
 /// Called initially to start the app.
 void main() => runApp(Flip());

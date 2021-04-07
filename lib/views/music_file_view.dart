@@ -1,11 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'styles.dart';
-import 'drill_file_view.dart';
+import 'package:pdftron_flutter/pdftron_flutter.dart';
+import 'package:flutter_plugin_pdf_viewer/flutter_plugin_pdf_viewer.dart';
+import 'package:flip/utilities/styles.dart';
 
-/// Creates and manages the Drill screen.
-class DrillView extends StatelessWidget {
-  DrillView({Key key}) : super(key: key);
+/// Manages dynamic state for the Music File class.
+class MusicFileView extends StatefulWidget {
+  MusicFileView({Key key}) : super(key: key);
+
+  /// Creates the dynamic state for the Music File class.
+  @override
+  _MusicFileViewState createState() => _MusicFileViewState();
+}
+
+/// Creates and manages the Music File screen.
+class _MusicFileViewState extends State<MusicFileView> {
+  PDFDocument doc;
+
+  /// Called on view load to initialize the view.
+  @override
+  void initState() {
+    super.initState();
+    _loadFromAssets();
+  }
+
+  void _loadFromAssets() async {
+    doc = await PDFDocument.fromAsset('data/Dynamite/Dynamite_2019-AllParts.pdf');
+  }
 
   /// Builds the UI using widgets.
   @override
@@ -16,9 +37,10 @@ class DrillView extends StatelessWidget {
               slivers: [
                 // Navigation bar at the top of the screen that contains the view title and navigation buttons.
                 CupertinoSliverNavigationBar(
-                  largeTitle: Text('Shows', style: TextStyle(color:
-                  Styles.gold,)
+                  largeTitle: Text('Parts', style: TextStyle(color:
+                  Styles.gold)
                   ),
+                  previousPageTitle: 'Instruments',
                 ),
                 SliverPadding(
                   padding: const EdgeInsets.only(top: 5.0),
@@ -40,20 +62,28 @@ class DrillView extends StatelessWidget {
                               decoration: BoxDecoration(
                                   image:
                                   DecorationImage(
-                                    image: AssetImage('assets/images/folder_white.png'),
+                                    image: AssetImage('assets/images/file_white.png'),
                                     fit: BoxFit.none,
                                   )
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.only(top: 165.0),
-                                child: Text('Show $index Drill'),
+                                child: Text('Instrument Part $index PDF'),
                               )
                           ),
                           GestureDetector(
                               onTap: () {
+                                //Uri pdfPath = Uri.file("data/Dynamite/Dynamite_2019-AllParts.pdf");
+                                //PdftronFlutter.openDocument(pdfPath.toString());
+
+
                                 Navigator.push(
-                                    context, CupertinoPageRoute(builder: (_) => DrillFileView()
-                                ));
+                                    context,
+                                    CupertinoPageRoute(builder: (context) {
+                                      return PDFViewer(document: doc);
+                                    }
+                                  )
+                                );
                               }
                           )
                         ],

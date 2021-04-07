@@ -1,31 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:pdftron_flutter/pdftron_flutter.dart';
-import 'package:flutter_plugin_pdf_viewer/flutter_plugin_pdf_viewer.dart';
-import 'styles.dart';
+import 'music_file_view.dart';
+import 'package:flip/utilities/styles.dart';
 
-/// Manages dynamic state for the Music File class.
-class MusicFileView extends StatefulWidget {
-  MusicFileView({Key key}) : super(key: key);
+/// Manages dynamic state for the Music Folder class.
+class MusicFolderView extends StatefulWidget {
+  MusicFolderView({Key key}) : super(key: key);
 
-  /// Creates the dynamic state for the Music File class.
+  /// Creates the dynamic state for the Music Folder class.
   @override
-  _MusicFileViewState createState() => _MusicFileViewState();
+  _MusicFolderViewState createState() => _MusicFolderViewState();
 }
 
-/// Creates and manages the Music File screen.
-class _MusicFileViewState extends State<MusicFileView> {
-  PDFDocument doc;
+/// Creates and manages the Music Folder screen.
+class _MusicFolderViewState extends State<MusicFolderView> {
 
   /// Called on view load to initialize the view.
   @override
   void initState() {
     super.initState();
-    _loadFromAssets();
-  }
-
-  void _loadFromAssets() async {
-    doc = await PDFDocument.fromAsset('data/Dynamite/Dynamite_2019-AllParts.pdf');
   }
 
   /// Builds the UI using widgets.
@@ -37,10 +30,10 @@ class _MusicFileViewState extends State<MusicFileView> {
               slivers: [
                 // Navigation bar at the top of the screen that contains the view title and navigation buttons.
                 CupertinoSliverNavigationBar(
-                  largeTitle: Text('Parts', style: TextStyle(color:
+                  largeTitle: Text('Instruments', style: TextStyle(color:
                   Styles.gold)
                   ),
-                  previousPageTitle: 'Instruments',
+                  previousPageTitle: 'Music',
                 ),
                 SliverPadding(
                   padding: const EdgeInsets.only(top: 5.0),
@@ -62,34 +55,33 @@ class _MusicFileViewState extends State<MusicFileView> {
                               decoration: BoxDecoration(
                                   image:
                                   DecorationImage(
-                                    image: AssetImage('assets/images/file_white.png'),
+                                    image: AssetImage('assets/images/folder_white.png'),
                                     fit: BoxFit.none,
                                   )
                               ),
                               child: Padding(
-                                padding: const EdgeInsets.only(top: 165.0),
-                                child: Text('Instrument Part $index PDF'),
+                                padding: const EdgeInsets.only(top: 160.0),
+                                child: Text('Instrument Folder $index'),
                               )
                           ),
                           GestureDetector(
                               onTap: () {
-                                //Uri pdfPath = Uri.file("data/Dynamite/Dynamite_2019-AllParts.pdf");
-                                //PdftronFlutter.openDocument(pdfPath.toString());
-
-
+                                //TODO: object darkens when pressed
+                                //setState(() {
+                                //_cellColor = darkerVandyGold;
                                 Navigator.push(
                                     context,
                                     CupertinoPageRoute(builder: (context) {
-                                      return PDFViewer(document: doc);
-                                    }
-                                  )
+                                      return MusicFileView();
+                                    })
                                 );
+                                //});
                               }
                           )
                         ],
                       );
                     },
-                    childCount: 2,
+                    childCount: 4,
                   ),
                 ),
               ],

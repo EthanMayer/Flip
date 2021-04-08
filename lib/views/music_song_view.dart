@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'music_folder_view.dart';
+import 'music_instrument_view.dart';
 import 'package:flip/utilities/styles.dart';
 
 /// Manages dynamic state for the Music class.
-class MusicView extends StatelessWidget {
-  MusicView({Key key}) : super(key: key);
+class MusicSongView extends StatelessWidget {
+  MusicSongView({Key key}) : super(key: key);
 
   /// Builds the UI using widgets.
   @override
@@ -57,7 +57,7 @@ class MusicView extends StatelessWidget {
                           Navigator.push(
                             context,
                             CupertinoPageRoute(builder: (context) {
-                              return MusicFolderView();
+                              return MusicInstrumentView();
                             })
                           );
                         }

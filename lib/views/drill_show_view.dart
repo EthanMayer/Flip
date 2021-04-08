@@ -4,8 +4,8 @@ import 'package:flip/utilities/styles.dart';
 import 'drill_file_view.dart';
 
 /// Creates and manages the Drill screen.
-class DrillView extends StatelessWidget {
-  DrillView({Key key}) : super(key: key);
+class DrillShowView extends StatelessWidget {
+  DrillShowView({Key key}) : super(key: key);
 
   /// Builds the UI using widgets.
   @override

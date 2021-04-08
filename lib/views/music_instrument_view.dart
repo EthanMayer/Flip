@@ -4,8 +4,8 @@ import 'music_file_view.dart';
 import 'package:flip/utilities/styles.dart';
 
 /// Manages dynamic state for the Music Folder class.
-class MusicFolderView extends StatefulWidget {
-  MusicFolderView({Key key}) : super(key: key);
+class MusicInstrumentView extends StatefulWidget {
+  MusicInstrumentView({Key key}) : super(key: key);
 
   /// Creates the dynamic state for the Music Folder class.
   @override
@@ -13,7 +13,7 @@ class MusicFolderView extends StatefulWidget {
 }
 
 /// Creates and manages the Music Folder screen.
-class _MusicFolderViewState extends State<MusicFolderView> {
+class _MusicFolderViewState extends State<MusicInstrumentView> {
 
   /// Called on view load to initialize the view.
   @override

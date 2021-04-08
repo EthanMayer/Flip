@@ -3,6 +3,48 @@ import 'package:flutter/cupertino.dart';
 import 'package:flip/utilities/styles.dart';
 import 'login_view.dart';
 import 'account_view.dart';
+import 'addmusic_view.dart';
+
+class FirstRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context){
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('First Route'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          child: Text('Open route'),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SecondRoute()),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class SecondRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Second Route"),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text('Go back!'),
+        ),
+      ),
+    );
+  }
+}
 
 /// Creates and manages the Home screen.
 class HomeView extends StatelessWidget {
@@ -47,9 +89,26 @@ class HomeView extends StatelessWidget {
                     ));
                   }),
             ),
+            CupertinoButton(
+              child: Text(
+                'Add New Sheet Music',
+                style: Styles.textButton,
+              ),
+              onPressed: () {
+                Navigator.push(
+                    context, CupertinoPageRoute(builder: (_) => FirstRoute()
+                ));
+              },
+              borderRadius: BorderRadius.circular(25.0),
+              color: Styles.gold,
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.only(
+                  left: 30.0, right: 30.0, top: 25.0, bottom: 0),
+            )
           ],
         )
     );
   }
-  
+
 }

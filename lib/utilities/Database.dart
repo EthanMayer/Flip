@@ -3,7 +3,7 @@ import 'package:sqflite/sqflite.dart';
 //import 'todo.dart';
 
 /// Handles SQLite database functions.
-class DatabaseHelper {
+class FlipDatabase {
 
   // Database and table constants.
   static const _databaseName = "flip.db";
@@ -18,8 +18,8 @@ class DatabaseHelper {
   static const drillFileTable = 'drill_file';
 
 
-  DatabaseHelper._privateConstructor();
-  static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
+  FlipDatabase._privateConstructor();
+  static final FlipDatabase instance = FlipDatabase._privateConstructor();
 
   /// Grab the database if it exists or initialize it if it doesn't.
   Future<Database> get database async {
@@ -48,7 +48,7 @@ class DatabaseHelper {
   /// Executes SQL code to create all tables needed in the database.
   Future _onCreate(Database db, int version) async {
     await db.execute('''
-          BEGIN TRANSACTION;
+          BEGIN;
           
           CREATE TABLE $musicSongTable (
             music_song_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -85,7 +85,7 @@ class DatabaseHelper {
   }
 
   /// Return the primary key column name for the table provided.
-  String _determinePrimaryKeyColumnName(String table) {
+  String determinePrimaryKeyColumnName(String table) {
     switch(table) {
       case musicSongTable: {
         return "music_song_id";
@@ -109,7 +109,7 @@ class DatabaseHelper {
   }
 
   /// Return the primary key column name for the table provided.
-  String _determineTextColumnName(String table) {
+  String determineTextColumnName(String table) {
     switch(table) {
       case musicSongTable: {
         return "music_song_name";
@@ -142,7 +142,7 @@ class DatabaseHelper {
   /// Delete provided row id in the specified table.
   Future<int> delete(String table, int id) async {
     Database db = await instance.database;
-    String primaryKey = _determinePrimaryKeyColumnName(table);
+    String primaryKey = determinePrimaryKeyColumnName(table);
     var numDeleted = await db.delete(table, where: '$primaryKey = ?', whereArgs: [id]);
     return numDeleted;
   }
@@ -150,7 +150,7 @@ class DatabaseHelper {
   /// Query a specified table to get a list ordered by the primary key.
   Future<List<Map<String, dynamic>>> query(String table) async {
     Database db = await instance.database;
-    String primaryKey = _determinePrimaryKeyColumnName(table);
+    String primaryKey = determinePrimaryKeyColumnName(table);
     var items = await db.query(table, orderBy: "$primaryKey");
     return items;
   }
@@ -158,7 +158,7 @@ class DatabaseHelper {
   /// Search a specified table to get a list.
   Future<List<Map<String, dynamic>>> search(String table, String keywords) async {
     Database db = await instance.database;
-    String name = _determineTextColumnName(table);
+    String name = determineTextColumnName(table);
     var items = await db.query(table, where: '$name = ?', whereArgs: [keywords]);
     return items;
   }
@@ -168,5 +168,20 @@ class DatabaseHelper {
     Database db = await instance.database;
     var rows = await db.rawQuery("DELETE FROM $table");
     return rows;
+  }
+
+  Future<void> clearDatabase() async {
+    Database db = await instance.database;
+    var err = await db.rawQuery("""
+      BEGIN;
+      
+      DROP TABLE $musicSongTable;
+      DROP TABLE $musicInstrumentTable;
+      DROP TABLE $musicFileTable;
+      DROP TABLE $drillShowTable;
+      DROP TABLE $drillFileTable;
+      
+      END;
+      """);
   }
 }

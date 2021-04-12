@@ -4,6 +4,7 @@ import 'package:flip/utilities/styles.dart';
 import 'login_view.dart';
 import 'account_view.dart';
 import 'add_music_view.dart';
+import 'add_drill_view.dart';
 
 /// Creates and manages the Home screen.
 class HomeView extends StatelessWidget {
@@ -14,6 +15,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
         child: CustomScrollView(
+          physics: NeverScrollableScrollPhysics(),
           slivers: [
             // Navigation bar at the top of the screen that contains the view title and navigation buttons.
             CupertinoSliverNavigationBar(
@@ -76,7 +78,7 @@ class HomeView extends StatelessWidget {
                         ),
                         onPressed: () {
                           Navigator.push(
-                              context, CupertinoPageRoute(builder: (_) => AddMusicView()
+                              context, CupertinoPageRoute(builder: (_) => AddDrillView()
                           ));
                         },
                         borderRadius: BorderRadius.circular(25.0),

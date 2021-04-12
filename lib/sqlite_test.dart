@@ -1,11 +1,13 @@
-import "package:flip/utilities/Database.dart";
+import "package:flip/utilities/flip_database.dart";
 import 'package:flutter_test/flutter_test.dart';
+//import 'package:shared_preferences/shared_preferences.dart';
 
-/// Test the SQLite functions in Database.dart to ensure backend functions as expected.
+/// Test the SQLite functions in flip_database.dart to ensure backend functions as expected.
 void main() {
-  TestWidgetsFlutterBinding.ensureInitialized();
+  //TestWidgetsFlutterBinding.ensureInitialized();
 
   test('test inserting into database', () async {
+    //SharedPreferences prefs = await SharedPreferences.getInstance();
     Map<String, dynamic> name = {
       FlipDatabase.instance.determineTextColumnName(FlipDatabase.musicSongTable)
           : 'Dynamite'

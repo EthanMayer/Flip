@@ -20,19 +20,6 @@ class HomeView extends StatelessWidget {
                 'Home',
                 style: TextStyle(color: Styles.gold),
               ),
-              // Left nav bar button, navigates to Login view (DEBUG ONLY).
-              leading: CupertinoButton(
-                  child: Text(
-                    'DEBUGL',
-                    style: TextStyle(color: Styles.systemBlue),
-                  ),
-                  padding: EdgeInsets.all(10),
-                  // Navigates to Login View when pressed.
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                        context, CupertinoPageRoute(builder: (_) => LoginView()
-                    ));
-                  }),
               // Right nav bar button, navigates to Account view.
               trailing: CupertinoButton(
                   child: Text(

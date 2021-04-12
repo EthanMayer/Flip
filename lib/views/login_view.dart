@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'account_view.dart';
 import 'package:flip/utilities/styles.dart';
 import 'tab_view.dart';
+import 'package:flip/sqlite_test.dart';
 
 // The correct login password.
 const String CORRECT_PASSWORD = "vandy";
@@ -140,6 +141,7 @@ class _LoginViewState extends State<LoginView> {
                   style: Styles.textButton,
                 ),
                 onPressed: () {
+                  //main();
                   _validatePassword();
                 },
                 borderRadius: BorderRadius.circular(25.0),

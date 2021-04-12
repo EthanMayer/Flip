@@ -146,6 +146,7 @@ class _LoginViewState extends State<LoginView> {
                 },
                 borderRadius: BorderRadius.circular(25.0),
                 color: Styles.gold,
+                pressedOpacity: 0.75,
               ),
             )
           ],

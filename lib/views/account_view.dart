@@ -182,38 +182,44 @@ class _AccountViewState extends State<AccountView> {
                 // Create the name text field.
                 Padding(
                   padding: const EdgeInsets.only(
-                      left: 30.0, right: 30.0, top: 50.0, bottom: 0),
-                  child: CupertinoTextField(
-                    placeholder: "Name",
-                    placeholderStyle: Styles.textRowPlaceholder,
-                    style: Styles.textRowPlaceholder,
-                    textAlign: TextAlign.center,
-                    padding: const EdgeInsets.only(
-                        left: 0.0, right: 0.0, top: 15.0, bottom: 15.0),
-                    decoration: BoxDecoration(
-                      color: CupertinoColors.white,
-                      borderRadius: BorderRadius.circular(25.0),
+                      left: 0, right: 0, top: 50.0, bottom: 0),
+                  child: SizedBox(
+                    width: 350,
+                    child: CupertinoTextField(
+                      placeholder: "Name",
+                      placeholderStyle: Styles.textRowPlaceholder,
+                      style: Styles.textRowPlaceholder,
+                      textAlign: TextAlign.center,
+                      padding: const EdgeInsets.only(
+                          left: 0.0, right: 0.0, top: 15.0, bottom: 15.0),
+                      decoration: BoxDecoration(
+                        color: CupertinoColors.white,
+                        borderRadius: BorderRadius.circular(25.0),
+                      ),
+                      onSubmitted: (text) {
+                        _name = text;
+                        _updateName();
+                      },
                     ),
-                    onSubmitted: (text) {
-                      _name = text;
-                      _updateName();
-                    },
-                  ),
+                  )
                 ),
                 // Create the university text field/picker.
                 Padding(
                     padding: const EdgeInsets.only(
-                        left: 30.0, right: 30.0, top: 25.0, bottom: 0),
-                    child: CupertinoButton(
-                      child: Text(
-                        _university,
-                        style: Styles.textRowPlaceholder,
+                        left: 0, right: 0, top: 25.0, bottom: 0),
+                    child: SizedBox(
+                      width: 350,
+                      child: CupertinoButton(
+                        child: Text(
+                          _university,
+                          style: Styles.textRowPlaceholder,
+                        ),
+                        borderRadius: BorderRadius.circular(25.0),
+                        color: CupertinoColors.white,
+                        onPressed: () {
+                          _showUniversityPicker();
+                        },
                       ),
-                      borderRadius: BorderRadius.circular(25.0),
-                      color: CupertinoColors.white,
-                      onPressed: () {
-                        _showUniversityPicker();
-                      },
                     )
                 ),
                 // Create the instrument text field/picker.
@@ -224,16 +230,19 @@ class _AccountViewState extends State<AccountView> {
                       top: 25.0,
                       bottom: 0
                   ),
-                  child: CupertinoButton(
-                    child: Text(
-                      _instrument,
-                      style: Styles.textRowPlaceholder,
+                  child: SizedBox(
+                    width: 350,
+                    child: CupertinoButton(
+                      child: Text(
+                        _instrument,
+                        style: Styles.textRowPlaceholder,
+                      ),
+                      borderRadius: BorderRadius.circular(25.0),
+                      color: CupertinoColors.white,
+                      onPressed: () {
+                        _showInstrumentPicker();
+                      },
                     ),
-                    borderRadius: BorderRadius.circular(25.0),
-                    color: CupertinoColors.white,
-                    onPressed: () {
-                      _showInstrumentPicker();
-                    },
                   )
                 ),
               ]

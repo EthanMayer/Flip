@@ -58,6 +58,7 @@ class _AddMusicViewState extends State<AddMusicView> {
                     child: SizedBox(
                       width: 350,
                       child: CupertinoTextField(
+                        //controller: ,TODO: Text controllers for text field values
                         placeholder: _songName,
                         placeholderStyle: Styles.textRowPlaceholder,
                         style: Styles.textRowPlaceholder,
@@ -106,9 +107,9 @@ class _AddMusicViewState extends State<AddMusicView> {
                     ),
                     onPressed: () {
                       _save();
-                      // Navigator.push(
-                      //     context, CupertinoPageRoute(builder: (_) => AddPartsView()
-                      // ));
+                      Navigator.push(
+                          context, CupertinoPageRoute(builder: (_) => AddPartsView()
+                      ));
                     },
                     borderRadius: BorderRadius.circular(25.0),
                     color: Styles.gold,

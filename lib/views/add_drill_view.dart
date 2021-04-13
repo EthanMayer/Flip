@@ -56,6 +56,7 @@ class _AddDrillViewState extends State<AddDrillView> {
                               placeholder: "Show Name",
                               placeholderStyle: Styles.textRowPlaceholder,
                               style: Styles.textRowPlaceholder,
+                              autocorrect: false,
                               textAlign: TextAlign.center,
                               padding: const EdgeInsets.only(
                                   left: 0.0, right: 0.0, top: 15.0, bottom: 15.0),

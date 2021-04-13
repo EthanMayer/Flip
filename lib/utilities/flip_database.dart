@@ -18,6 +18,38 @@ class FlipDatabase {
   static const drillShowTable = 'drill_show';
   static const drillFileTable = 'drill_file';
 
+  static const _tableMusicSong = """
+  CREATE TABLE IF NOT EXISTS $musicSongTable (
+            music_song_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            music_song_name TEXT,
+            score_file BLOB
+          );""";
+  static const _tableMusicInstrument = """
+  CREATE TABLE IF NOT EXISTS $musicInstrumentTable (
+            music_instrument_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            music_instrument_name TEXT,
+            music_song_id INTEGER REFERENCES $musicSongTable(music_song_id)
+          );""";
+  static const _tableMusicFile = """
+  CREATE TABLE IF NOT EXISTS $musicFileTable (
+            music_file_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            music_file_name TEXT,
+            music_file BLOB,
+            music_instrument_id INTEGER REFERENCES $musicInstrumentTable(music_instrument_id)
+          );""";
+  static const _tableDrillShow = """
+  CREATE TABLE IF NOT EXISTS $drillShowTable (
+            drill_show_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            drill_show_name TEXT
+          );""";
+  static const _tableDrillFile = """
+  CREATE TABLE IF NOT EXISTS $drillFileTable (
+            drill_file_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            drill_file_name TEXT,
+            drill_file BLOB,
+            drill_show_id INTEGER REFERENCES $drillShowTable(drill_show_id)
+          );""";
+
 
   FlipDatabase._privateConstructor();
   static final FlipDatabase instance = FlipDatabase._privateConstructor();
@@ -48,41 +80,17 @@ class FlipDatabase {
 
   /// Executes SQL code to create all tables needed in the database.
   Future _onCreate(Database db, int version) async {
-    await db.execute('''
-          BEGIN;
-          
-          CREATE TABLE $musicSongTable (
-            music_song_id INTEGER PRIMARY KEY AUTOINCREMENT,
-            music_song_name TEXT
-          );
-          
-          CREATE TABLE $musicInstrumentTable (
-            music_instrument_id INTEGER PRIMARY KEY AUTOINCREMENT,
-            music_instrument_name TEXT,
-            music_song_id INTEGER REFERENCES $musicSongTable(music_song_id)
-          );
-          
-          CREATE TABLE $musicFileTable (
-            music_file_id INTEGER PRIMARY KEY AUTOINCREMENT,
-            music_file_name TEXT,
-            music_file BLOB,
-            music_instrument_id INTEGER REFERENCES $musicInstrumentTable(music_instrument_id)
-          );
-          
-          CREATE TABLE $drillShowTable (
-            drill_show_id INTEGER PRIMARY KEY AUTOINCREMENT,
-            drill_show_name TEXT
-          );
-          
-          CREATE TABLE $drillFileTable (
-            drill_file_id INTEGER PRIMARY KEY AUTOINCREMENT,
-            drill_file_name TEXT,
-            drill_file BLOB,
-            drill_show_id INTEGER REFERENCES $drillShowTable(drill_show_id)
-          );
-          
-          COMMIT;
-          ''');
+    await db.execute(_tableMusicSong);
+    await db.execute(_tableMusicInstrument);
+    await db.execute(_tableMusicFile);
+    await db.execute(_tableDrillShow);
+    await db.execute(_tableDrillFile);
+  }
+
+  Map<String, dynamic> toMap(String columnName, dynamic data) {
+    return {
+      columnName : data
+    };
   }
 
   /// Return the primary key column name for the table provided.
@@ -134,9 +142,10 @@ class FlipDatabase {
   }
 
   /// Insert provided data into the specified table.
-  Future<int> insert(String table, Map<String, dynamic> data) async {
+  Future<int> insertString(String table, String data) async {
+    var dataMap = toMap(determineTextColumnName(table), data);
     Database db = await instance.database;
-    var id = await db.insert(table, data, conflictAlgorithm: ConflictAlgorithm.replace);
+    var id = await db.insert(table, dataMap, conflictAlgorithm: ConflictAlgorithm.replace);
     return id;
   }
 
@@ -173,16 +182,10 @@ class FlipDatabase {
 
   Future<void> clearDatabase() async {
     Database db = await instance.database;
-    var err = await db.rawQuery("""
-      BEGIN;
-      
-      DROP TABLE $musicSongTable;
-      DROP TABLE $musicInstrumentTable;
-      DROP TABLE $musicFileTable;
-      DROP TABLE $drillShowTable;
-      DROP TABLE $drillFileTable;
-      
-      END;
-      """);
+    await db.execute("DROP TABLE $musicSongTable;");
+    await db.execute("DROP TABLE $musicInstrumentTable;");
+    await db.execute("DROP TABLE $musicFileTable;");
+    await db.execute("DROP TABLE $drillShowTable;");
+    await db.execute("DROP TABLE $drillFileTable;");
   }
 }

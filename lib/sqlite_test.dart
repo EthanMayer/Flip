@@ -8,27 +8,24 @@ void main() {
 
   test('test inserting into database', () async {
     //SharedPreferences prefs = await SharedPreferences.getInstance();
-    Map<String, dynamic> name = {
-      FlipDatabase.instance.determineTextColumnName(FlipDatabase.musicSongTable)
-          : 'Dynamite'
-    };
+    String name = "Dynamite";
 
-    int row = await FlipDatabase.instance.insert(FlipDatabase.musicSongTable, name);
-    expect(row, 0);
-
-    name = {
-      FlipDatabase.instance.determineTextColumnName(FlipDatabase.musicSongTable)
-          : 'Anchors Aweigh'
-    };
-
-    row = await FlipDatabase.instance.insert(FlipDatabase.musicSongTable, name);
+    int row = await FlipDatabase.instance.insertString(FlipDatabase.musicSongTable, name);
     expect(row, 1);
+
+    name = "Anchors Aweigh";
+
+    row = await FlipDatabase.instance.insertString(FlipDatabase.musicSongTable, name);
+    expect(row, 2);
   });
 
   test('test searching from database', () async {
     Map<String, dynamic> name = {
+      FlipDatabase.instance.determinePrimaryKeyColumnName(FlipDatabase.musicSongTable)
+          : 1,
       FlipDatabase.instance.determineTextColumnName(FlipDatabase.musicSongTable)
-          : 'Dynamite'
+          : 'Dynamite',
+      'score_file' : null
     };
 
     List<Map<String, dynamic>> row = await FlipDatabase.instance.search(
@@ -42,13 +39,19 @@ void main() {
 
   test('test querying from database', () async {
     Map<String, dynamic> name = {
+      FlipDatabase.instance.determinePrimaryKeyColumnName(FlipDatabase.musicSongTable)
+          : 1,
       FlipDatabase.instance.determineTextColumnName(FlipDatabase.musicSongTable)
-          : 'Dynamite'
+          : 'Dynamite',
+      'score_file' : null
     };
 
     Map<String, dynamic> name2 = {
+      FlipDatabase.instance.determinePrimaryKeyColumnName(FlipDatabase.musicSongTable)
+          : 2,
       FlipDatabase.instance.determineTextColumnName(FlipDatabase.musicSongTable)
-          : 'Anchors Aweigh'
+          : 'Anchors Aweigh',
+      'score_file' : null
     };
 
     List<Map<String, dynamic>> row = await FlipDatabase.instance.query(
@@ -63,8 +66,8 @@ void main() {
   });
 
   test('test deleting from database', () async {
-    int row = await FlipDatabase.instance.delete(FlipDatabase.musicSongTable, 0);
-    expect(row, 0);
+    int row = await FlipDatabase.instance.delete(FlipDatabase.musicSongTable, 1);
+    expect(row, 1);
   });
 
   test('test clearing database', () async {

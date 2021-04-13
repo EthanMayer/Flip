@@ -141,7 +141,7 @@ class _LoginViewState extends State<LoginView> {
                   style: Styles.textButton,
                 ),
                 onPressed: () {
-                  //main();
+                  main();
                   _validatePassword();
                 },
                 borderRadius: BorderRadius.circular(25.0),

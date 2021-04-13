@@ -15,7 +15,12 @@ class AddMusicView extends StatefulWidget {
 /// Creates and manages the Account screen.
 class _AddMusicViewState extends State<AddMusicView> {
 
+  String _songName = "Song Name";
   String _scoreName = "Score PDF";
+
+  _save() async {
+    await FlipDatabase.instance.insertString(FlipDatabase.musicSongTable, _songName);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +58,10 @@ class _AddMusicViewState extends State<AddMusicView> {
                     child: SizedBox(
                       width: 350,
                       child: CupertinoTextField(
-                        placeholder: "Song Name",
+                        placeholder: _songName,
                         placeholderStyle: Styles.textRowPlaceholder,
                         style: Styles.textRowPlaceholder,
+                        autocorrect: false,
                         textAlign: TextAlign.center,
                         padding: const EdgeInsets.only(
                             left: 0.0, right: 0.0, top: 15.0, bottom: 15.0),
@@ -63,10 +69,12 @@ class _AddMusicViewState extends State<AddMusicView> {
                           color: CupertinoColors.white,
                           borderRadius: BorderRadius.circular(25.0),
                         ),
-                        // onSubmitted: (text) {
-                        //   _name = text;
-                        //   _updateName();
-                        // },
+                        onChanged: (text) {
+                          _songName = text;
+                        },
+                        onSubmitted: (text) {
+                          _songName = text;
+                        },
                       ),
                     )
                 ),
@@ -97,9 +105,10 @@ class _AddMusicViewState extends State<AddMusicView> {
                       style: Styles.textButton,
                     ),
                     onPressed: () {
-                      Navigator.push(
-                          context, CupertinoPageRoute(builder: (_) => AddPartsView()
-                      ));
+                      _save();
+                      // Navigator.push(
+                      //     context, CupertinoPageRoute(builder: (_) => AddPartsView()
+                      // ));
                     },
                     borderRadius: BorderRadius.circular(25.0),
                     color: Styles.gold,

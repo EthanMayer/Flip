@@ -52,9 +52,10 @@ class _AddPartsViewState extends State<AddPartsView> {
                           child: SizedBox(
                             width: 350,
                             child: CupertinoTextField(
-                              placeholder: "Song Name",
+                              placeholder: "Part Name",
                               placeholderStyle: Styles.textRowPlaceholder,
                               style: Styles.textRowPlaceholder,
+                              autocorrect: false,
                               textAlign: TextAlign.center,
                               padding: const EdgeInsets.only(
                                   left: 0.0, right: 0.0, top: 15.0, bottom: 15.0),

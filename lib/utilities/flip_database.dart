@@ -1,6 +1,6 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'dart:async';
+import 'dart:io';
 //import 'todo.dart';
 
 /// Handles SQLite database functions.
@@ -141,9 +141,57 @@ class FlipDatabase {
     }
   }
 
+  String determineFileColumnName(String table) {
+    switch(table) {
+      case musicSongTable: {
+        return "score_file";
+      }
+      case musicFileTable: {
+        return "music_file";
+      }
+      case drillFileTable: {
+        return "drill_file";
+      }
+      default: {
+        return "NULL";
+      }
+    }
+  }
+
+  String determineIDColumnName(String table) {
+    switch(table) {
+      case musicInstrumentTable: {
+        return "music_song_id";
+      }
+      case musicFileTable: {
+        return "music_instrument_id";
+      }
+      case drillFileTable: {
+        return "drill_show_id";
+      }
+      default: {
+        return "NULL";
+      }
+    }
+  }
+
   /// Insert provided data into the specified table.
   Future<int> insertString(String table, String data) async {
     var dataMap = toMap(determineTextColumnName(table), data);
+    Database db = await instance.database;
+    var id = await db.insert(table, dataMap, conflictAlgorithm: ConflictAlgorithm.replace);
+    return id;
+  }
+
+  Future<int> insert(String table, Map<String, dynamic> data) async {
+    Database db = await instance.database;
+    var id = await db.insert(table, data, conflictAlgorithm: ConflictAlgorithm.replace);
+    return id;
+  }
+
+  /// Insert provided data into the specified table.
+  Future<int> insertFile(String table, File data) async {
+    var dataMap = toMap(determineFileColumnName(table), data);
     Database db = await instance.database;
     var id = await db.insert(table, dataMap, conflictAlgorithm: ConflictAlgorithm.replace);
     return id;
@@ -162,6 +210,13 @@ class FlipDatabase {
     Database db = await instance.database;
     String primaryKey = determinePrimaryKeyColumnName(table);
     var items = await db.query(table, orderBy: "$primaryKey");
+    return items;
+  }
+
+  Future<List<Map<String, dynamic>>> queryID(String table, int id) async {
+    Database db = await instance.database;
+    String name = determineIDColumnName(table);
+    var items = await db.query(table, where: '$name = ?', whereArgs: [id]);
     return items;
   }
 

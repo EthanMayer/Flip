@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:pdftron_flutter/pdftron_flutter.dart';
+//import 'package:pdftron_flutter/pdftron_flutter.dart';
 import 'package:flip/utilities/styles.dart';
 
 /// Creates and manages the Drill File screen.
@@ -53,7 +53,7 @@ class DrillFileView extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              PdftronFlutter.openDocument("https://pdftron.s3.amazonaws.com/downloads/pdfref.pdf");
+                              //PdftronFlutter.openDocument("https://pdftron.s3.amazonaws.com/downloads/pdfref.pdf");
                             }
                           )
                         ],

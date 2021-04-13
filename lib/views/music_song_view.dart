@@ -16,9 +16,8 @@ class MusicSongView extends StatefulWidget {
 /// Creates and manages the Music Folder screen.
 class _MusicSongViewState extends State<MusicSongView> {
   FlipDatabase db = FlipDatabase.instance;
-
   List<Map<String, dynamic>> dataList;
-
+  int children = 0;
 
   @override
   void initState() {
@@ -34,6 +33,9 @@ class _MusicSongViewState extends State<MusicSongView> {
 
   void _getData() async {
     dataList = await db.query(FlipDatabase.musicSongTable);
+    setState(() {
+      children = dataList.length;
+    });
   }
 
   /// Builds the UI using widgets.
@@ -71,40 +73,44 @@ class _MusicSongViewState extends State<MusicSongView> {
                 childAspectRatio: 3 / 3,
               ),
               delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
-                   // Create the objects in the grid.
+                if (dataList == null) {
+                  return null;
+                } else {
+                  // Create the objects in the grid.
                   return Stack(
                     children: [
                       Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          image:
-                          DecorationImage(
-                            image: AssetImage('assets/images/folder_white.png'),
-                            fit: BoxFit.none,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              image:
+                              DecorationImage(
+                                image: AssetImage('assets/images/folder_white.png'),
+                                fit: BoxFit.none,
+                              )
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 160.0),
+                            child: Text(dataList[index]["music_song_name"]),
                           )
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 160.0),
-                          child: Text(dataList[index]["music_song_name"]),
-                        )
                       ),
                       GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            _refreshData();
-                          });
-                          Navigator.push(
-                            context,
-                            CupertinoPageRoute(builder: (context) {
-                              return MusicInstrumentView();
-                            })
-                          );
-                        }
+                          onTap: () {
+                            setState(() {
+                              _refreshData();
+                            });
+                            Navigator.push(
+                                context,
+                                CupertinoPageRoute(builder: (context) {
+                                  return MusicInstrumentView(id: dataList[index]["music_song_id"]);
+                                })
+                            );
+                          }
                       )
                     ],
                   );
+                }
                 },
-                childCount: dataList.length,
+                childCount: children,
               ),
             ),
           ],

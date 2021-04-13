@@ -2,23 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'music_file_view.dart';
 import 'package:flip/utilities/styles.dart';
+import 'package:flip/utilities/flip_database.dart';
 
 /// Manages dynamic state for the Music Folder class.
 class MusicInstrumentView extends StatefulWidget {
-  MusicInstrumentView({Key key}) : super(key: key);
+  MusicInstrumentView({Key key, this.id}) : super(key: key);
+  final int id;
 
   /// Creates the dynamic state for the Music Folder class.
   @override
-  _MusicFolderViewState createState() => _MusicFolderViewState();
+  _MusicFolderViewState createState() => _MusicFolderViewState(id);
 }
 
 /// Creates and manages the Music Folder screen.
 class _MusicFolderViewState extends State<MusicInstrumentView> {
+  _MusicFolderViewState(this.id);
+  final int id;
+  FlipDatabase db = FlipDatabase.instance;
+  List<Map<String, dynamic>> dataList;
+  int children = 0;
 
-  /// Called on view load to initialize the view.
   @override
   void initState() {
     super.initState();
+    _refreshData();
+  }
+
+  _refreshData() {
+    setState(() {
+      _getData();
+    });
+  }
+
+  void _getData() async {
+    dataList = await db.queryID(FlipDatabase.musicInstrumentTable, id);
+    setState(() {
+      children = dataList.length;
+    });
   }
 
   /// Builds the UI using widgets.
@@ -34,6 +54,13 @@ class _MusicFolderViewState extends State<MusicInstrumentView> {
                   Styles.gold)
                   ),
                   previousPageTitle: 'Music',
+                  trailing: CupertinoButton(
+                      child: Icon(CupertinoIcons.refresh),
+                      padding: EdgeInsets.all(10),
+                      // Navigates to Account View when pressed.
+                      onPressed: () {
+                        _refreshData();
+                      }),
                 ),
                 SliverPadding(
                   padding: const EdgeInsets.only(top: 5.0),
@@ -61,7 +88,7 @@ class _MusicFolderViewState extends State<MusicInstrumentView> {
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.only(top: 160.0),
-                                child: Text('Instrument Folder $index'),
+                                child: Text(dataList[index]["music_instrument_name"]),
                               )
                           ),
                           GestureDetector(
@@ -72,7 +99,7 @@ class _MusicFolderViewState extends State<MusicInstrumentView> {
                                 Navigator.push(
                                     context,
                                     CupertinoPageRoute(builder: (context) {
-                                      return MusicFileView();
+                                      return MusicFileView(id: dataList[index]["music_instrument_id"]);
                                     })
                                 );
                                 //});
@@ -81,7 +108,7 @@ class _MusicFolderViewState extends State<MusicInstrumentView> {
                         ],
                       );
                     },
-                    childCount: 4,
+                    childCount: children,
                   ),
                 ),
               ],

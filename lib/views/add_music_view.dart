@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flip/utilities/styles.dart';
 import 'package:flip/utilities/flip_database.dart';
 import 'add_parts_view.dart';
+import 'package:file_picker/file_picker.dart';
+import 'dart:io';
 
 class AddMusicView extends StatefulWidget {
   AddMusicView({Key key}) : super(key: key);
@@ -14,12 +16,28 @@ class AddMusicView extends StatefulWidget {
 
 /// Creates and manages the Account screen.
 class _AddMusicViewState extends State<AddMusicView> {
+  FlipDatabase db = FlipDatabase.instance;
 
   String _songName = "Song Name";
-  String _scoreName = "Score PDF";
+  String _fileName = "Score PDF";
+  File file;
 
-  _save() async {
-    await FlipDatabase.instance.insertString(FlipDatabase.musicSongTable, _songName);
+  Future<int> _save() async {
+    Map<String, dynamic> data = {
+      "music_song_name" : _songName,
+      "score_file" : file
+    };
+
+    return await db.insert(FlipDatabase.musicSongTable, data);
+  }
+
+  _getFiles() async {
+    FilePickerResult result = await FilePicker.platform.pickFiles(
+        type: FileType.custom, allowedExtensions: ['pdf']);
+
+    if(result != null) {
+      file = File(result.files.first.path);
+    }
   }
 
   @override
@@ -86,13 +104,13 @@ class _AddMusicViewState extends State<AddMusicView> {
                       width: 350,
                       child: CupertinoButton(
                         child: Text(
-                          _scoreName,
+                          _fileName,
                           style: Styles.textRowPlaceholder,
                         ),
                         borderRadius: BorderRadius.circular(25.0),
                         color: CupertinoColors.white,
                         onPressed: () {
-                        //   _showUniversityPicker();
+                          _getFiles();
                         },
                       ),
                     )
@@ -105,10 +123,10 @@ class _AddMusicViewState extends State<AddMusicView> {
                       'Next',
                       style: Styles.textButton,
                     ),
-                    onPressed: () {
-                      _save();
+                    onPressed: () async {
+                      int id = await _save();
                       Navigator.push(
-                          context, CupertinoPageRoute(builder: (_) => AddPartsView()
+                          context, CupertinoPageRoute(builder: (_) => AddPartsView(id: id)
                       ));
                     },
                     borderRadius: BorderRadius.circular(25.0),

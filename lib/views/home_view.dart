@@ -8,7 +8,103 @@ import 'add_drill_view.dart';
 
 /// Creates and manages the Home screen.
 class HomeView extends StatelessWidget {
-  HomeView({Key key}) : super(key: key);
+  HomeView({Key key, this.conductor}) : super(key: key);
+  final bool conductor;
+
+  Column _buildColumn(BuildContext context) {
+    if (conductor) {
+      return Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(
+                left: 0, right: 0, top: 35.0, bottom: 0),
+            child: SizedBox(
+              width: 370,
+              child: CupertinoButton(
+                child: Text(
+                  'Add New Sheet Music',
+                  style: Styles.textButton,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                      context, CupertinoPageRoute(builder: (_) => AddMusicView()
+                  ));
+                },
+                borderRadius: BorderRadius.circular(25.0),
+                color: Styles.gold,
+                pressedOpacity: 0.75,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+                left: 0, right: 0, top: 35.0, bottom: 0),
+            child: SizedBox(
+              width: 370,
+              child: CupertinoButton(
+                child: Text(
+                  'Add New Drill Sheets',
+                  style: Styles.textButton,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                      context, CupertinoPageRoute(builder: (_) => AddDrillView()
+                  ));
+                },
+                borderRadius: BorderRadius.circular(25.0),
+                color: Styles.gold,
+                pressedOpacity: 0.75,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+                left: 0, right: 0, top: 35.0, bottom: 0),
+            child: SizedBox(
+              width: 370,
+              child: CupertinoButton(
+                child: Text(
+                  'Global Music Pull-Up',
+                  style: Styles.textButton,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                      context, CupertinoPageRoute(builder: (_) => AddMusicView()
+                  ));
+                },
+                borderRadius: BorderRadius.circular(25.0),
+                color: Styles.gold,
+                pressedOpacity: 0.75,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+                left: 0, right: 0, top: 35.0, bottom: 0),
+            child: SizedBox(
+              width: 370,
+              child: CupertinoButton(
+                child: Text(
+                  'Global Drill Pull-Up',
+                  style: Styles.textButton,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                      context, CupertinoPageRoute(builder: (_) => AddMusicView()
+                  ));
+                },
+                borderRadius: BorderRadius.circular(25.0),
+                color: Styles.gold,
+                pressedOpacity: 0.75,
+              ),
+            ),
+          ),
+        ]
+      );
+    } else {
+      return null;
+    }
+  }
 
   /// Builds the UI using widgets.
   @override
@@ -43,94 +139,7 @@ class HomeView extends StatelessWidget {
             //       left: 30.0, right: 30.0, top: 25.0, bottom: 0),
             // ),
             SliverFillRemaining(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 0, right: 0, top: 35.0, bottom: 0),
-                    child: SizedBox(
-                      width: 370,
-                      child: CupertinoButton(
-                        child: Text(
-                          'Add New Sheet Music',
-                          style: Styles.textButton,
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                              context, CupertinoPageRoute(builder: (_) => AddMusicView()
-                          ));
-                        },
-                        borderRadius: BorderRadius.circular(25.0),
-                        color: Styles.gold,
-                        pressedOpacity: 0.75,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 0, right: 0, top: 35.0, bottom: 0),
-                    child: SizedBox(
-                      width: 370,
-                      child: CupertinoButton(
-                        child: Text(
-                          'Add New Drill Sheets',
-                          style: Styles.textButton,
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                              context, CupertinoPageRoute(builder: (_) => AddDrillView()
-                          ));
-                        },
-                        borderRadius: BorderRadius.circular(25.0),
-                        color: Styles.gold,
-                        pressedOpacity: 0.75,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 0, right: 0, top: 35.0, bottom: 0),
-                    child: SizedBox(
-                      width: 370,
-                      child: CupertinoButton(
-                        child: Text(
-                          'Global Music Pull-Up',
-                          style: Styles.textButton,
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                              context, CupertinoPageRoute(builder: (_) => AddMusicView()
-                          ));
-                        },
-                        borderRadius: BorderRadius.circular(25.0),
-                        color: Styles.gold,
-                        pressedOpacity: 0.75,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 0, right: 0, top: 35.0, bottom: 0),
-                    child: SizedBox(
-                      width: 370,
-                      child: CupertinoButton(
-                        child: Text(
-                          'Global Drill Pull-Up',
-                          style: Styles.textButton,
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                              context, CupertinoPageRoute(builder: (_) => AddMusicView()
-                          ));
-                        },
-                        borderRadius: BorderRadius.circular(25.0),
-                        color: Styles.gold,
-                        pressedOpacity: 0.75,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              child: _buildColumn(context)
             ),
           ],
         )

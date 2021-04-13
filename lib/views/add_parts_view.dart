@@ -2,19 +2,56 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flip/utilities/styles.dart';
 import 'package:flip/utilities/flip_database.dart';
+import 'package:file_picker/file_picker.dart';
+import 'dart:io';
+import 'home_view.dart';
 
 class AddPartsView extends StatefulWidget {
-  AddPartsView({Key key}) : super(key: key);
+  AddPartsView({Key key, this.id}) : super(key: key);
+  final int id;
 
   /// Creates the dynamic state for the Add Music class.
   @override
-  _AddPartsViewState createState() => _AddPartsViewState();
+  _AddPartsViewState createState() => _AddPartsViewState(id);
 }
 
 /// Creates and manages the Account screen.
 class _AddPartsViewState extends State<AddPartsView> {
+  _AddPartsViewState(this.songID);
+  final int songID;
+  int partID;
+  FlipDatabase db = FlipDatabase.instance;
+  File file;
 
-  String _scoreName = "Score PDF";
+  String _partName = "Part Name";
+  String _fileName = "Part PDF";
+
+  _save() async {
+    Map<String, dynamic> data = {
+      "music_instrument_name" : _partName,
+      "music_song_id" : songID
+    };
+    partID = await db.insert(FlipDatabase.musicInstrumentTable, data);
+
+    Map<String, dynamic> data2 = {
+      "music_file_name" : _partName + ".pdf",
+      "music_file" : file.readAsBytesSync(),
+      "music_instrument_id" : partID
+    };
+    await db.insert(FlipDatabase.musicFileTable, data2);
+  }
+
+  _getFiles() async {
+    FilePickerResult result = await FilePicker.platform.pickFiles(
+        type: FileType.custom, allowedExtensions: ['pdf']);
+
+    if(result != null) {
+      file = File(result.files.first.path);
+      setState(() {
+        _fileName = file.path;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +62,7 @@ class _AddPartsViewState extends State<AddPartsView> {
             // Navigation bar at the top of the screen that contains the view title and navigation buttons.
             CupertinoSliverNavigationBar(
               largeTitle: Text(
-                'Add Parts',
+                'Add Part',
                 style: TextStyle(color: Styles.gold),
               ),
               previousPageTitle: "Add Music",
@@ -52,7 +89,8 @@ class _AddPartsViewState extends State<AddPartsView> {
                           child: SizedBox(
                             width: 350,
                             child: CupertinoTextField(
-                              placeholder: "Part Name",
+                              //controller: ,TODO: Text controllers for text field values
+                              placeholder: _partName,
                               placeholderStyle: Styles.textRowPlaceholder,
                               style: Styles.textRowPlaceholder,
                               autocorrect: false,
@@ -63,10 +101,12 @@ class _AddPartsViewState extends State<AddPartsView> {
                                 color: CupertinoColors.white,
                                 borderRadius: BorderRadius.circular(25.0),
                               ),
-                              // onSubmitted: (text) {
-                              //   _name = text;
-                              //   _updateName();
-                              // },
+                              onChanged: (text) {
+                                _partName = text;
+                              },
+                              onSubmitted: (text) {
+                                _partName = text;
+                              },
                             ),
                           )
                       ),
@@ -77,13 +117,13 @@ class _AddPartsViewState extends State<AddPartsView> {
                             width: 350,
                             child: CupertinoButton(
                               child: Text(
-                                _scoreName,
+                                _fileName,
                                 style: Styles.textRowPlaceholder,
                               ),
                               borderRadius: BorderRadius.circular(25.0),
                               color: CupertinoColors.white,
                               onPressed: () {
-                                //   _showUniversityPicker();
+                                _getFiles();
                               },
                             ),
                           )
@@ -97,8 +137,10 @@ class _AddPartsViewState extends State<AddPartsView> {
                             style: Styles.textButton,
                           ),
                           onPressed: () {
-                            //main();
-                            //_validatePassword();
+                            _save();
+                            Navigator.pushReplacement(
+                                context, CupertinoPageRoute(builder: (_) => HomeView(conductor: true,)
+                            ));
                           },
                           borderRadius: BorderRadius.circular(25.0),
                           color: Styles.gold,

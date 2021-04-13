@@ -8,6 +8,7 @@ import 'package:flip/sqlite_test.dart';
 
 // The correct login password.
 const String CORRECT_PASSWORD = "vandy";
+const String CONDUCTOR_PASSWORD = "Vandy";
 
 /// Manages dynamic state for the Login class.
 class LoginView extends StatefulWidget {
@@ -43,14 +44,18 @@ class _LoginViewState extends State<LoginView> {
 
   /// Validate password when submitted to determine which view to load.
   _validatePassword() {
-    if(_password == CORRECT_PASSWORD) {
+    if(_password == CORRECT_PASSWORD || _password == CONDUCTOR_PASSWORD) {
       if (_firstLaunch) {
         Navigator.push(
             context, CupertinoPageRoute(builder: (_) => AccountView()
         ));
+      } else if (_password == CONDUCTOR_PASSWORD) {
+        Navigator.push(
+            context, CupertinoPageRoute(builder: (_) => TabView(c: true)
+        ));
       } else {
         Navigator.pushReplacement(
-            context, CupertinoPageRoute(builder: (_) => TabView()
+            context, CupertinoPageRoute(builder: (_) => TabView(c: false)
         ));
       }
     } else {

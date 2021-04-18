@@ -5,8 +5,8 @@
 import socket
 import sys
 
-HOST = ''	# Symbolic name, meaning all available interfaces
-PORT = 3000	# Arbitrary non-privileged port
+HOST = '127.0.0.1'	# Symbolic name, meaning all available interfaces
+PORT = 8000	# Arbitrary non-privileged port
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print ('Socket created')

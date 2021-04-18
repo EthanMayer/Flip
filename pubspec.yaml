@@ -29,10 +29,15 @@ dependencies:
   #    url: git://github.com/PDFTron/pdftron-flutter.git
   sqflite:
   path:
+<<<<<<< Updated upstream
   #flutter_plugin_pdf_viewer: ^1.0.7
   advance_pdf_viewer:
   #flutter_pdfview:
   file_picker:
+=======
+  flutter_plugin_pdf_viewer: ^1.0.7
+  web_socket_channel:
+>>>>>>> Stashed changes
 
 
   # The following adds the Cupertino Icons font to your application.

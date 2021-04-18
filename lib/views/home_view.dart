@@ -106,6 +106,34 @@ class HomeView extends StatelessWidget {
     }
   }
 
+  @override
+  _HomeViewState createState() => _HomeViewState();
+}
+
+
+/// Creates and manages the Home screen.
+/// This is Jaden's attempt at creating a server...does not work
+// class _HomeViewState extends State<HomeView> {
+//
+//   WebSocketChannel _channel;
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     _connectSocketChannel();
+//   }
+//
+//
+//   _connectSocketChannel(){
+//     print('Here');
+//     _channel = IOWebSocketChannel.connect("ws://10.0.0.2:8000");
+//     print('Done');
+//   }
+//
+//   void sendMessgae(){
+//     _channel.sink.add("test");
+//   }
+
   /// Builds the UI using widgets.
   @override
   Widget build(BuildContext context) {

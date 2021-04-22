@@ -33,6 +33,7 @@ dependencies:
   advance_pdf_viewer:
   #flutter_pdfview:
   file_picker:
+  modal_bottom_sheet:
 
 
   # The following adds the Cupertino Icons font to your application.

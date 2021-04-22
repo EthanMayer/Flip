@@ -47,8 +47,9 @@ class _MusicSongViewState extends State<MusicSongView> {
           slivers: [
             // Navigation bar at the top of the screen that contains the view title and navigation buttons.
             CupertinoSliverNavigationBar(
-              largeTitle: Text('Music', style: TextStyle(color:
-              Styles.gold)
+              largeTitle: Text(
+                  'Music',
+                  style: TextStyle(color: Styles.gold)
               ),
               // middle: CupertinoSearchTextField(
               // TODO: Fix search bar

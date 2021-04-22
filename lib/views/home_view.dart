@@ -121,10 +121,11 @@ class HomeView extends StatelessWidget {
               ),
               // Right nav bar button, navigates to Account view.
               trailing: CupertinoButton(
-                  child: Text(
-                    'Account',
-                    style: TextStyle(color: Styles.systemBlue),
-                  ),
+                  child: Icon(CupertinoIcons.person),
+                  // Text(
+                  //   'Account',
+                  //   style: TextStyle(color: Styles.systemBlue),
+                  // ),
                   padding: EdgeInsets.all(10),
                   // Navigates to Account View when pressed.
                   onPressed: () {

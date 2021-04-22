@@ -58,8 +58,9 @@ class _MusicFileViewState extends State<MusicFileView> {
               slivers: [
                 // Navigation bar at the top of the screen that contains the view title and navigation buttons.
                 CupertinoSliverNavigationBar(
-                  largeTitle: Text('Parts', style: TextStyle(color:
-                  Styles.gold)
+                  largeTitle: Text(
+                      'Parts',
+                      style: TextStyle(color: Styles.gold)
                   ),
                   previousPageTitle: 'Instruments',
                   trailing: CupertinoButton(
@@ -82,39 +83,44 @@ class _MusicFileViewState extends State<MusicFileView> {
                     childAspectRatio: 3 / 3,
                   ),
                   delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
-                      // Create the objects in the grid.
-                      return Stack(
-                        children: [
-                          Container(
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                  image:
-                                  DecorationImage(
-                                    image: AssetImage('assets/images/file_white.png'),
-                                    fit: BoxFit.none,
-                                  )
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 165.0),
-                                child: Text(dataList[index]["music_file_name"]),
-                              )
-                          ),
-                          GestureDetector(
-                              onTap: () async {
-                                doc = await PDFDocument.fromAsset('data/Dynamite/Dynamite_2019-AllParts.pdf');
-                                Navigator.push(
-                                    context,
-                                    CupertinoPageRoute(builder: (context) {
-                                      return PDFViewer(
+                      if (dataList == null) {
+                        return null;
+                      } else {
+                        // Create the objects in the grid.
+                        return Stack(
+                          children: [
+                            Container(
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                    image:
+                                    DecorationImage(
+                                      image: AssetImage('assets/images/file_white.png'),
+                                      fit: BoxFit.none,
+                                    )
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(top: 165.0),
+                                  child: Text(dataList[index]["music_file_name"]),
+                                )
+                            ),
+                            GestureDetector(
+                                onTap: () async {
+                                  doc = await PDFDocument.fromAsset(
+                                      'data/Dynamite/Dynamite_2019-AllParts.pdf');
+                                  Navigator.push(
+                                      context,
+                                      CupertinoPageRoute(builder: (context) {
+                                        return PDFViewer(
                                           document: doc,
-                                      );
-                                    }
-                                  )
-                                );
-                              }
-                          )
-                        ],
-                      );
+                                        );
+                                      }
+                                      )
+                                  );
+                                }
+                            )
+                          ],
+                        );
+                      }
                     },
                     childCount: children,
                   ),

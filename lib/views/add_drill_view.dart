@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flip/utilities/styles.dart';
 import 'package:flip/utilities/flip_database.dart';
-import 'add_parts_view.dart';
+import 'home_view.dart';
+import 'package:file_picker/file_picker.dart';
+import 'dart:io';
 
 class AddDrillView extends StatefulWidget {
   AddDrillView({Key key}) : super(key: key);
@@ -14,8 +16,39 @@ class AddDrillView extends StatefulWidget {
 
 /// Creates and manages the Account screen.
 class _AddDrillViewState extends State<AddDrillView> {
+  FlipDatabase db = FlipDatabase.instance;
 
-  String _scoreName = "Drill Sheet PDF";
+  String _showName = "Show Name";
+  String _fileName = "Drill Sheet PDF";
+  File file;
+  int showID;
+
+  Future<void> _save() async {
+    Map<String, dynamic> data = {
+      "drill_show_name" : _showName,
+    };
+
+    showID = await db.insert(FlipDatabase.drillShowTable, data);
+
+    Map<String, dynamic> data2 = {
+      "drill_file_name" : _fileName + ".pdf",
+      "drill_file" : file.readAsBytesSync(),
+      "drill_show_id" : showID
+    };
+    await db.insert(FlipDatabase.drillFileTable, data2);
+  }
+
+  _getFiles() async {
+    FilePickerResult result = await FilePicker.platform.pickFiles(
+        type: FileType.custom, allowedExtensions: ['pdf']);
+
+    if(result != null) {
+      file = File(result.files.first.path);
+      setState(() {
+        _fileName = file.path;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +86,7 @@ class _AddDrillViewState extends State<AddDrillView> {
                           child: SizedBox(
                             width: 350,
                             child: CupertinoTextField(
-                              placeholder: "Show Name",
+                              placeholder: _showName,
                               placeholderStyle: Styles.textRowPlaceholder,
                               style: Styles.textRowPlaceholder,
                               autocorrect: false,
@@ -64,10 +97,12 @@ class _AddDrillViewState extends State<AddDrillView> {
                                 color: CupertinoColors.white,
                                 borderRadius: BorderRadius.circular(25.0),
                               ),
-                              // onSubmitted: (text) {
-                              //   _name = text;
-                              //   _updateName();
-                              // },
+                              onChanged: (text) {
+                                _showName = text;
+                              },
+                              onSubmitted: (text) {
+                                _showName = text;
+                              },
                             ),
                           )
                       ),
@@ -78,13 +113,13 @@ class _AddDrillViewState extends State<AddDrillView> {
                             width: 350,
                             child: CupertinoButton(
                               child: Text(
-                                _scoreName,
+                                _fileName,
                                 style: Styles.textRowPlaceholder,
                               ),
                               borderRadius: BorderRadius.circular(25.0),
                               color: CupertinoColors.white,
                               onPressed: () {
-                                //   _showUniversityPicker();
+                                _getFiles();
                               },
                             ),
                           )
@@ -98,8 +133,9 @@ class _AddDrillViewState extends State<AddDrillView> {
                             style: Styles.textButton,
                           ),
                           onPressed: () {
-                            Navigator.push(
-                                context, CupertinoPageRoute(builder: (_) => AddPartsView()
+                            _save();
+                            Navigator.pushReplacement(
+                                context, CupertinoPageRoute(builder: (_) => HomeView(conductor: true)
                             ));
                           },
                           borderRadius: BorderRadius.circular(25.0),

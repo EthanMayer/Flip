@@ -138,19 +138,20 @@ class _AccountViewState extends State<AccountView> {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
+        automaticallyImplyLeading: false,
         middle: Text('Account'),
         // Left nav bar button, navigates to previous view.
-        leading: CupertinoButton(
-            child: Text(
-              'Cancel',
-              style: TextStyle(
-                color: Styles.systemBlue,
-              ),
-            ),
-            padding: EdgeInsets.all(10),
-            onPressed: () {
-              Navigator.of(context).maybePop();
-            }),
+        // leading: CupertinoButton(
+        //     child: Text(
+        //       'Cancel',
+        //       style: TextStyle(
+        //         color: Styles.systemBlue,
+        //       ),
+        //     ),
+        //     padding: EdgeInsets.all(10),
+        //     onPressed: () {
+        //       Navigator.of(context).maybePop();
+        //     }),
         // Right nav bar button, navigates to Home view.
         trailing: CupertinoButton(
           child: Text(
@@ -161,9 +162,7 @@ class _AccountViewState extends State<AccountView> {
           ),
           padding: EdgeInsets.all(10),
           onPressed: () {
-            Navigator.pushReplacement(
-                context, CupertinoPageRoute(builder: (_) => TabView()
-            ));
+            Navigator.of(context).maybePop();
           }),
         ),
         child: SingleChildScrollView(

@@ -5,6 +5,7 @@ import 'login_view.dart';
 import 'account_view.dart';
 import 'add_music_view.dart';
 import 'add_drill_view.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 /// Creates and manages the Home screen.
 class HomeView extends StatelessWidget {
@@ -115,6 +116,7 @@ class HomeView extends StatelessWidget {
           slivers: [
             // Navigation bar at the top of the screen that contains the view title and navigation buttons.
             CupertinoSliverNavigationBar(
+              automaticallyImplyLeading: false,
               largeTitle: Text(
                 'Home',
                 style: TextStyle(color: Styles.gold),
@@ -129,9 +131,14 @@ class HomeView extends StatelessWidget {
                   padding: EdgeInsets.all(10),
                   // Navigates to Account View when pressed.
                   onPressed: () {
-                    Navigator.push(
-                        context, CupertinoPageRoute(builder: (_) => AccountView()
-                    ));
+                    // Navigator.push(
+                    //     context, CupertinoPageRoute(builder: (_) => AccountView()
+                    // ));
+                    showCupertinoModalBottomSheet(
+                        context: context,
+                        expand: true,
+                        duration: Duration(milliseconds: 300),
+                        builder: (_) => AccountView());
                   }
                 ),
             ),

@@ -30,7 +30,7 @@ dependencies:
   sqflite:
   path: ^1.8.0
   #flutter_plugin_pdf_viewer: ^1.0.7
-  advance_pdf_viewer:
+  #advance_pdf_viewer:
   #flutter_pdfview:
   file_picker: ^3.0.1
   modal_bottom_sheet: ^2.0.0

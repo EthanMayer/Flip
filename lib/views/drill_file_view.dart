@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 //import 'package:pdftron_flutter/pdftron_flutter.dart';
 import 'package:flip/utilities/styles.dart';
 import 'package:flip/utilities/flip_database.dart';
-import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
+//import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
 
 /// Creates and manages the Drill File screen.
 class DrillFileView extends StatefulWidget {
@@ -22,7 +22,7 @@ class _DrillFileViewState extends State<DrillFileView> {
   FlipDatabase db = FlipDatabase.instance;
   List<Map<String, dynamic>> dataList;
   int children = 0;
-  PDFDocument doc;
+  //PDFDocument doc;
 
   @override
   void initState() {
@@ -98,19 +98,19 @@ class _DrillFileViewState extends State<DrillFileView> {
                                 )
                             ),
                             GestureDetector(
-                                onTap: () async {
-                                  doc = await PDFDocument.fromAsset(
-                                      'data/Dynamite/Dynamite_2019-AllParts.pdf');
-                                  Navigator.push(
-                                      context,
-                                      CupertinoPageRoute(builder: (context) {
-                                        return PDFViewer(
-                                          document: doc,
-                                        );
-                                      }
-                                      )
-                                  );
-                                }
+                                // onTap: () async {
+                                //   doc = await PDFDocument.fromAsset(
+                                //       'data/Dynamite/Dynamite_2019-AllParts.pdf');
+                                //   Navigator.push(
+                                //       context,
+                                //       CupertinoPageRoute(builder: (context) {
+                                //         return PDFViewer(
+                                //           document: doc,
+                                //         );
+                                //       }
+                                //       )
+                                //   );
+                                // }
                             )
                           ],
                         );

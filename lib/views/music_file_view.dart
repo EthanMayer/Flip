@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 //import 'package:pdftron_flutter/pdftron_flutter.dart';
 //import 'package:flutter_plugin_pdf_viewer/flutter_plugin_pdf_viewer.dart';
-import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
+//import 'package:advance_pdf_viewer/advance_pdf_viewer.dart'; - this one
 import 'package:flip/utilities/styles.dart';
 import 'package:flip/utilities/flip_database.dart';
 
@@ -23,7 +23,7 @@ class _MusicFileViewState extends State<MusicFileView> {
   List<Map<String, dynamic>> dataList;
   int children = 0;
   FlipDatabase db = FlipDatabase.instance;
-  PDFDocument doc;
+  //PDFDocument doc;
 
   /// Called on view load to initialize the view.
   @override
@@ -46,7 +46,7 @@ class _MusicFileViewState extends State<MusicFileView> {
   }
 
   void _loadFromAssets() async {
-    doc = await PDFDocument.fromAsset('data/Dynamite/Dynamite_2019-AllParts.pdf');
+    //doc = await PDFDocument.fromAsset('data/Dynamite/Dynamite_2019-AllParts.pdf');
   }
 
   /// Builds the UI using widgets.
@@ -104,19 +104,19 @@ class _MusicFileViewState extends State<MusicFileView> {
                                 )
                             ),
                             GestureDetector(
-                                onTap: () async {
-                                  doc = await PDFDocument.fromAsset(
-                                      'data/Dynamite/Dynamite_2019-AllParts.pdf');
-                                  Navigator.push(
-                                      context,
-                                      CupertinoPageRoute(builder: (context) {
-                                        return PDFViewer(
-                                          document: doc,
-                                        );
-                                      }
-                                      )
-                                  );
-                                }
+                                // onTap: () async {
+                                //   //doc = await PDFDocument.fromAsset(
+                                //   //    'data/Dynamite/Dynamite_2019-AllParts.pdf');
+                                //   Navigator.push(
+                                //       context,
+                                //       CupertinoPageRoute(builder: (context) {
+                                //         return PDFViewer(
+                                //           document: doc,
+                                //         );
+                                //       }
+                                //       )
+                                //   );
+                                // }
                             )
                           ],
                         );
@@ -132,6 +132,6 @@ class _MusicFileViewState extends State<MusicFileView> {
   }
 }
 
-class MyPDFViewer extends PDFViewer {
-
-}
+// class MyPDFViewer extends PDFViewer {
+//
+// }

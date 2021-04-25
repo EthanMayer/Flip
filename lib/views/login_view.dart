@@ -5,6 +5,7 @@ import 'account_view.dart';
 import 'package:flip/utilities/styles.dart';
 import 'tab_view.dart';
 import 'package:flip/sqlite_test.dart';
+import 'package:flip/utilities/client.dart';
 
 
 
@@ -47,11 +48,13 @@ class _LoginViewState extends State<LoginView> {
   /// Validate password when submitted to determine which view to load.
   _validatePassword() {
     if(_password == CORRECT_PASSWORD || _password == CONDUCTOR_PASSWORD) {
+      Client.initialize();
       if (_firstLaunch) {
         Navigator.push(
             context, CupertinoPageRoute(builder: (_) => AccountView()
         ));
       } else if (_password == CONDUCTOR_PASSWORD) {
+        Client.master = true;
         Navigator.push(
             context, CupertinoPageRoute(builder: (_) => TabView(c: true)
         ));

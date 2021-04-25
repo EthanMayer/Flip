@@ -1,3 +1,4 @@
+import 'package:flip/views/music_song_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flip/utilities/styles.dart';
@@ -6,6 +7,7 @@ import 'account_view.dart';
 import 'add_music_view.dart';
 import 'add_drill_view.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:flip/utilities/client.dart';
 
 /// Creates and manages the Home screen.
 class HomeView extends StatelessWidget {
@@ -69,9 +71,13 @@ class HomeView extends StatelessWidget {
                   style: Styles.textButton,
                 ),
                 onPressed: () {
-                  Navigator.push(
-                      context, CupertinoPageRoute(builder: (_) => AddMusicView()
-                  ));
+                  showCupertinoModalBottomSheet(
+                      context: context,
+                      expand: true,
+                      duration: Duration(milliseconds: 300),
+                      builder: (_) => MusicSongView());
+                  //Client().sendMessage();
+                  //Client().disconnect();
                 },
                 borderRadius: BorderRadius.circular(25.0),
                 color: Styles.gold,
@@ -90,9 +96,9 @@ class HomeView extends StatelessWidget {
                   style: Styles.textButton,
                 ),
                 onPressed: () {
-                  Navigator.push(
-                      context, CupertinoPageRoute(builder: (_) => AddMusicView()
-                  ));
+                  // Navigator.push(
+                  //     context, CupertinoPageRoute(builder: (_) => AddMusicView()
+                  // ));
                 },
                 borderRadius: BorderRadius.circular(25.0),
                 color: Styles.gold,
@@ -107,33 +113,9 @@ class HomeView extends StatelessWidget {
     }
   }
 
-  @override
-  _HomeViewState createState() => _HomeViewState();
-}
-
-
-/// Creates and manages the Home screen.
-/// This is Jaden's attempt at creating a server...does not work
-// class _HomeViewState extends State<HomeView> {
-//
-//   WebSocketChannel _channel;
-//
 //   @override
-//   void initState() {
-//     super.initState();
-//     _connectSocketChannel();
-//   }
-//
-//
-//   _connectSocketChannel(){
-//     print('Here');
-//     _channel = IOWebSocketChannel.connect("ws://10.0.0.2:8000");
-//     print('Done');
-//   }
-//
-//   void sendMessgae(){
-//     _channel.sink.add("test");
-//   }
+//   _HomeViewState createState() => _HomeViewState();
+// }
 
   /// Builds the UI using widgets.
   @override
@@ -152,16 +134,9 @@ class HomeView extends StatelessWidget {
               // Right nav bar button, navigates to Account view.
               trailing: CupertinoButton(
                   child: Icon(CupertinoIcons.person),
-                  // Text(
-                  //   'Account',
-                  //   style: TextStyle(color: Styles.systemBlue),
-                  // ),
                   padding: EdgeInsets.all(10),
                   // Navigates to Account View when pressed.
                   onPressed: () {
-                    // Navigator.push(
-                    //     context, CupertinoPageRoute(builder: (_) => AccountView()
-                    // ));
                     showCupertinoModalBottomSheet(
                         context: context,
                         expand: true,
@@ -181,5 +156,4 @@ class HomeView extends StatelessWidget {
         )
     );
   }
-
 }

@@ -48,7 +48,7 @@ class _LoginViewState extends State<LoginView> {
   /// Validate password when submitted to determine which view to load.
   _validatePassword() {
     if(_password == CORRECT_PASSWORD || _password == CONDUCTOR_PASSWORD) {
-      Client.initialize();
+      //Client.initialize();
       if (_firstLaunch) {
         Navigator.push(
             context, CupertinoPageRoute(builder: (_) => AccountView()

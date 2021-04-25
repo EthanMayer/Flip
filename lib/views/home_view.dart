@@ -8,6 +8,7 @@ import 'add_music_view.dart';
 import 'add_drill_view.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:flip/utilities/client.dart';
+import 'drill_show_view.dart';
 
 /// Creates and manages the Home screen.
 class HomeView extends StatelessWidget {
@@ -75,7 +76,7 @@ class HomeView extends StatelessWidget {
                       context: context,
                       expand: true,
                       duration: Duration(milliseconds: 300),
-                      builder: (_) => MusicSongView());
+                      builder: (_) => MusicSongView(modal: true));
                   //Client().sendMessage();
                   //Client().disconnect();
                 },
@@ -96,9 +97,11 @@ class HomeView extends StatelessWidget {
                   style: Styles.textButton,
                 ),
                 onPressed: () {
-                  // Navigator.push(
-                  //     context, CupertinoPageRoute(builder: (_) => AddMusicView()
-                  // ));
+                  showCupertinoModalBottomSheet(
+                      context: context,
+                      expand: true,
+                      duration: Duration(milliseconds: 300),
+                      builder: (_) => DrillShowView(modal: true));
                 },
                 borderRadius: BorderRadius.circular(25.0),
                 color: Styles.gold,

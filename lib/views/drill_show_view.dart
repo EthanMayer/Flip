@@ -3,18 +3,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:flip/utilities/styles.dart';
 import 'drill_file_view.dart';
 import 'package:flip/utilities/flip_database.dart';
+import 'package:flip/utilities/client.dart';
 
 /// Creates and manages the Drill screen.
 class DrillShowView extends StatefulWidget {
-  DrillShowView({Key key}) : super(key: key);
+  DrillShowView({Key key, this.modal = false}) : super(key: key);
+  final bool modal;
 
   /// Creates the dynamic state for the Music Folder class.
   @override
-  _DrillShowViewState createState() => _DrillShowViewState();
+  _DrillShowViewState createState() => _DrillShowViewState(modal);
 }
 
 /// Creates and manages the Music Folder screen.
 class _DrillShowViewState extends State<DrillShowView> {
+  _DrillShowViewState(this.modal);
+  final bool modal;
   FlipDatabase db = FlipDatabase.instance;
   List<Map<String, dynamic>> dataList;
   int children = 0;
@@ -98,13 +102,18 @@ class _DrillShowViewState extends State<DrillShowView> {
                                   setState(() {
                                     _refreshData();
                                   });
-                                  Navigator.push(
-                                      context,
-                                      CupertinoPageRoute(builder: (context) {
-                                        return DrillFileView(
-                                            id: dataList[index]["drill_show_id"]);
-                                      })
-                                  );
+                                  if (!modal) {
+                                    Navigator.push(
+                                        context,
+                                        CupertinoPageRoute(builder: (context) {
+                                          return DrillFileView(
+                                              id: dataList[index]["drill_show_id"]);
+                                        })
+                                    );
+                                  } else {
+                                    Client().sendMessage("Drill", dataList[index]["music_song_id"].toString());
+                                    Navigator.pop(context);
+                                  }
                                 }
                             )
                           ],

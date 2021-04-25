@@ -4,7 +4,7 @@ import 'package:web_socket_channel/io.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 class Client {
-  static const String ADDRESS = 'ws://localhost:8000';//'ws://127.0.0.1:8000';
+  static const String ADDRESS = 'ws://echo.websocket.org';//'ws://localhost:8000';//'ws://127.0.0.1:8000';
   static WebSocketChannel _channel;
   static bool master = false;
 
@@ -16,7 +16,7 @@ class Client {
     _disconnectSocketChannel();
   }
   
-  static void _connectSocketChannel(){
+  static void _connectSocketChannel() {
     _channel = IOWebSocketChannel.connect(ADDRESS);
   }
 
@@ -24,8 +24,8 @@ class Client {
     _channel.sink.close();
   }
 
-  void sendMessage(){
-    _channel.sink.add("test");
+  void sendMessage(String type, String id) {
+    _channel.sink.add(id);
     _channel.stream.listen((message) {
       print(message);
     });

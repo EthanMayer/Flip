@@ -3,18 +3,22 @@ import 'package:flutter/cupertino.dart';
 import 'music_instrument_view.dart';
 import 'package:flip/utilities/styles.dart';
 import 'package:flip/utilities/flip_database.dart';
+import 'package:flip/utilities/client.dart';
 
 /// Manages dynamic state for the Music class.
 class MusicSongView extends StatefulWidget {
-  MusicSongView({Key key}) : super(key: key);
+  MusicSongView({Key key, this.modal = false}) : super(key: key);
+  final bool modal;
 
   /// Creates the dynamic state for the Music Folder class.
   @override
-  _MusicSongViewState createState() => _MusicSongViewState();
+  _MusicSongViewState createState() => _MusicSongViewState(modal);
 }
 
 /// Creates and manages the Music Folder screen.
 class _MusicSongViewState extends State<MusicSongView> {
+  _MusicSongViewState(this.modal);
+  final bool modal;
   FlipDatabase db = FlipDatabase.instance;
   List<Map<String, dynamic>> dataList;
   int children = 0;
@@ -99,12 +103,17 @@ class _MusicSongViewState extends State<MusicSongView> {
                             setState(() {
                               _refreshData();
                             });
-                            Navigator.push(
-                                context,
-                                CupertinoPageRoute(builder: (context) {
-                                  return MusicInstrumentView(id: dataList[index]["music_song_id"]);
-                                })
-                            );
+                            if (!modal) {
+                              Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(builder: (context) {
+                                    return MusicInstrumentView(id: dataList[index]["music_song_id"]);
+                                  })
+                              );
+                            } else {
+                              Client().sendMessage("Music", dataList[index]["music_song_id"].toString());
+                              Navigator.pop(context);
+                            }
                           }
                       )
                     ],

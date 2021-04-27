@@ -11,6 +11,7 @@ import 'package:flip/utilities/client.dart';
 import 'drill_show_view.dart';
 import 'package:flip/utilities/flip_database.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
+import 'dart:io';
 
 /// Creates and manages the Home screen.
 class HomeView extends StatefulWidget {
@@ -27,6 +28,7 @@ class _HomeViewState extends State<HomeView> {
   _HomeViewState(this.conductor);
   final bool conductor;
   FlipDatabase db = FlipDatabase.instance;
+  String id;
 
   @override
   initState() {
@@ -38,30 +40,9 @@ class _HomeViewState extends State<HomeView> {
 
   checkServer() async {
     if (!conductor) {
-      dynamic id = await Client().listen();
-      int idInt = id as int;
-      print(idInt);
-      if (idInt == 1) {
-        Navigator.push(
-            context,
-            CupertinoPageRoute(builder: (context) {
-              return PDF(
-                swipeHorizontal: true,
-                nightMode: true,
-              ).fromAsset('data/Dynamite/Dynamite_2019-AllParts.pdf');
-            })
-        );
-      } else if (idInt == 2) {
-        Navigator.push(
-            context,
-            CupertinoPageRoute(builder: (context) {
-              return PDF(
-                swipeHorizontal: true,
-                nightMode: true,
-              ).fromAsset('data/Dynamite/Alma_Mater_Score.pdf');
-            })
-        );
-      }
+      dynamic idt = await Client().listen();
+      print(idt);
+      //print(id.toString());
       //db.queryID(FlipDatabase.musicFileTable, id);
     }
   }
@@ -163,7 +144,50 @@ class _HomeViewState extends State<HomeView> {
         ]
       );
     } else {
-      return null;
+      return Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: 0, right: 0, top: 35.0, bottom: 0),
+              child: SizedBox(
+                width: 370,
+                child: CupertinoButton(
+                  child: Text(
+                    'Receive Music',
+                    style: Styles.textButton,
+                  ),
+                  onPressed: () {
+                    print(id);
+                    if (Client.received.toString().contains("1")) {
+                      Navigator.push(
+                          context,
+                          CupertinoPageRoute(builder: (context) {
+                            return PDF(
+                              swipeHorizontal: true,
+                              nightMode: true,
+                            ).fromAsset('data/Dynamite/Dynamite_2019-AllParts.pdf');
+                          })
+                      );
+                    } else if (Client.received.toString().contains("2")) {
+                      Navigator.push(
+                          context,
+                          CupertinoPageRoute(builder: (context) {
+                            return PDF(
+                              swipeHorizontal: true,
+                              nightMode: true,
+                            ).fromAsset('data/Dynamite/Alma_Mater_Score.pdf');
+                          })
+                      );
+                    }
+                  },
+                  borderRadius: BorderRadius.circular(25.0),
+                  color: Styles.gold,
+                  pressedOpacity: 0.75,
+                ),
+              ),
+            ),
+          ]
+      );
     }
   }
 
@@ -184,6 +208,14 @@ class _HomeViewState extends State<HomeView> {
               largeTitle: Text(
                 'Home',
                 style: TextStyle(color: Styles.gold),
+              ),
+              leading: CupertinoButton(
+                  child: Icon(CupertinoIcons.refresh),
+                  padding: EdgeInsets.all(10),
+                  // Navigates to Account View when pressed.
+                  onPressed: () {
+                    checkServer();
+                  }
               ),
               // Right nav bar button, navigates to Account view.
               trailing: CupertinoButton(

@@ -8,6 +8,7 @@ class Client {
   static const String ADDRESS2 = 'ws://136.58.86.221:9000';
   static IOWebSocketChannel _channel;
   static bool master = false;
+  static dynamic received;
 
   static void initialize() {
     _connectSocketChannel();
@@ -41,11 +42,11 @@ class Client {
 
   Future<dynamic> listen() {
     _connectSocketChannel();
-    dynamic data;
+    String data;
     _channel.stream.listen((message) {
       print(message);
-      data = message;
+      received = message;
+      return message;
     });
-    return data;
   }
 }

@@ -31,8 +31,14 @@ class _HomeViewState extends State<HomeView> {
   @override
   initState() {
     super.initState();
+    checkServer();
+
+    //Client.initialize();
+  }
+
+  checkServer() async {
     if (!conductor) {
-      dynamic id = Client().listen();
+      dynamic id = await Client().listen();
       int idInt = id as int;
       print(idInt);
       if (idInt == 1) {
@@ -58,7 +64,6 @@ class _HomeViewState extends State<HomeView> {
       }
       //db.queryID(FlipDatabase.musicFileTable, id);
     }
-    //Client.initialize();
   }
 
   Column _buildColumn(BuildContext context) {

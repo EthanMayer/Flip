@@ -3,18 +3,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'tab_view.dart';
 import 'package:flip/utilities/styles.dart';
+import 'home_view.dart';
 
 /// Manages dynamic state for the Account class.
 class AccountView extends StatefulWidget {
-  AccountView({Key key}) : super(key: key);
+  AccountView({Key key, this.first = false}) : super(key: key);
+  final bool first;
 
   /// Creates the dynamic state for the Account class.
   @override
-  _AccountViewState createState() => _AccountViewState();
+  _AccountViewState createState() => _AccountViewState(first);
 }
 
 /// Creates and manages the Account screen.
 class _AccountViewState extends State<AccountView> {
+  _AccountViewState(this._first);
+  bool _first;
 
   // Variables to keep a local copy of data.
   String _name = "Name";
@@ -162,7 +166,13 @@ class _AccountViewState extends State<AccountView> {
           ),
           padding: EdgeInsets.all(10),
           onPressed: () {
-            Navigator.of(context).maybePop();
+            if (!_first) {
+              Navigator.of(context).maybePop();
+            } else {
+              Navigator.pushReplacement(
+                  context, CupertinoPageRoute(builder: (_) => HomeView(conductor: false)
+              ));
+            }
           }),
         ),
         child: SingleChildScrollView(

@@ -49,9 +49,9 @@ class _LoginViewState extends State<LoginView> {
   _validatePassword() {
     if(_password == CORRECT_PASSWORD || _password == CONDUCTOR_PASSWORD) {
       //Client.initialize();
-      if (_firstLaunch) {
+      if (_firstLaunch && _password == CORRECT_PASSWORD) {
         Navigator.push(
-            context, CupertinoPageRoute(builder: (_) => AccountView()
+            context, CupertinoPageRoute(builder: (_) => AccountView(first: true)
         ));
       } else if (_password == CONDUCTOR_PASSWORD) {
         Client.master = true;

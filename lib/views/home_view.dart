@@ -51,7 +51,7 @@ class _HomeViewState extends State<HomeView> {
               ).fromAsset('data/Dynamite/Dynamite_2019-AllParts.pdf');
             })
         );
-      } else {
+      } else if (idInt == 2) {
         Navigator.push(
             context,
             CupertinoPageRoute(builder: (context) {

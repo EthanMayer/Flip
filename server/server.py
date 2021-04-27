@@ -2,32 +2,48 @@
 	Simple socket server using threads
 '''
 
-import socket
-import sys
+# import socket
+#
+# HOST = '192.168.1.158'	# Symbolic name, meaning all available interfaces
+# PORT = 8000	# Arbitrary non-privileged port
 
-HOST = '127.0.0.1'	# Symbolic name, meaning all available interfaces
-PORT = 8000	# Arbitrary non-privileged port
+# with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+# 	print ('Socket created')
+# 	s.bind((HOST, PORT))
+# 	print ('Socket bind complete on', HOST, PORT)
+# 	s.listen()
+# 	print ('Socket now listening')
+# 	conn, addr = s.accept()
+# 	with conn:
+# 		print('Connected by', addr)
+# 		while True:
+# 			print("Waiting for data")
+# 			data = conn.recv(1024)
+# 			print('Data received: ', data)
+# 			if not data:
+# 				break
+#				conn.sendall(data)
+#	s.close()
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-print ('Socket created')
+import websockets
+import asyncio
 
-#Bind socket to local host and port
-try:
-	s.bind((HOST, PORT))
-except socket.error as msg:
-	print (msg)
-	sys.exit()
-	
-print ('Socket bind complete')
+data = 0
 
-#Start listening on socket
-s.listen(10)
-print ('Socket now listening')
+async def server(websocket, path):
+    global data
+    print("Server1 awaiting connection")
+    data = await websocket.recv()
+    print('Data received: ', data)
 
-#now keep talking with the client
-while 1:
-    #wait to accept a connection - blocking call
-	conn, addr = s.accept()
-	print ('Connected with ' + addr[0] + ':' + str(addr[1]))
-	
-s.close()
+async def server2(websocket, path):
+    global data
+    print("Server2 awaiting connection")
+    await websocket.send(str(data))
+    print("Message sent: ", data)
+
+start_server = websockets.serve(server, '192.168.1.158', 8000)
+start_server2 = websockets.serve(server2, '192.168.1.158', 9000)
+asyncio.get_event_loop().run_until_complete(start_server)
+asyncio.get_event_loop().run_until_complete(start_server2)
+asyncio.get_event_loop().run_forever()

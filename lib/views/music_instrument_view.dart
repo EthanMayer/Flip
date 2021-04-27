@@ -87,7 +87,7 @@ class _MusicFolderViewState extends State<MusicInstrumentView> {
                                   )
                               ),
                               child: Padding(
-                                padding: const EdgeInsets.only(top: 160.0),
+                                padding: const EdgeInsets.only(top: 150.0),
                                 child: Text(dataList[index]["music_instrument_name"]),
                               )
                           ),

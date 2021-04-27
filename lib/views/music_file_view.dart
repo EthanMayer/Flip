@@ -5,6 +5,10 @@ import 'package:flutter/cupertino.dart';
 //import 'package:advance_pdf_viewer/advance_pdf_viewer.dart'; - this one
 import 'package:flip/utilities/styles.dart';
 import 'package:flip/utilities/flip_database.dart';
+import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
+import 'dart:io';
+import 'package:path/path.dart' as Path;
+import 'package:path_provider/path_provider.dart';
 
 /// Manages dynamic state for the Music File class.
 class MusicFileView extends StatefulWidget {
@@ -23,6 +27,8 @@ class _MusicFileViewState extends State<MusicFileView> {
   List<Map<String, dynamic>> dataList;
   int children = 0;
   FlipDatabase db = FlipDatabase.instance;
+  Directory tmp;
+  String tmpPath;
   //PDFDocument doc;
 
   /// Called on view load to initialize the view.
@@ -30,12 +36,18 @@ class _MusicFileViewState extends State<MusicFileView> {
   void initState() {
     super.initState();
     _refreshData();
+    _getDir();
   }
 
   _refreshData() {
     setState(() {
       _getData();
     });
+  }
+
+  _getDir() async {
+    tmp = await getTemporaryDirectory();
+    tmpPath = tmp.path;
   }
 
   void _getData() async {
@@ -99,7 +111,7 @@ class _MusicFileViewState extends State<MusicFileView> {
                                     )
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsets.only(top: 165.0),
+                                  padding: const EdgeInsets.only(top: 155.0),
                                   child: Text(dataList[index]["music_file_name"]),
                                 )
                             ),
@@ -117,6 +129,41 @@ class _MusicFileViewState extends State<MusicFileView> {
                                 //       )
                                 //   );
                                 // }
+                              // onTap: () async {
+                              //   File song = File.fromRawPath(dataList[index]["music_file"]);
+                              //   String fileName = Path.basename(song.path);
+                              //   await song.copy('$tmpPath/$fileName');
+                              //   Navigator.push(
+                              //       context,
+                              //       CupertinoPageRoute(builder: (context) {
+                              //         return PDF(
+                              //           swipeHorizontal: true,
+                              //           nightMode: true,
+                              //         ).fromPath('$tmpPath/$fileName');
+                              //         //fromAsset(song.path);
+                              //         // fromAsset('data/Dynamite/Dynamite_2019-AllParts.pdf');
+                              //       }
+                              //       )
+                              //   );
+                              // }
+                                onTap: () async {
+                                  Navigator.push(
+                                    context,
+                                    CupertinoPageRoute(builder: (context) {
+                                      if (index == 1) {
+                                        return PDF(
+                                          swipeHorizontal: true,
+                                          nightMode: true,
+                                        ).fromAsset('data/Dynamite/Dynamite_2019-AllParts.pdf');
+                                      } else {
+                                        return PDF(
+                                          swipeHorizontal: true,
+                                          nightMode: true,
+                                        ).fromAsset('data/Dynamite/Alma_Mater_Score.pdf');
+                                      }
+                                    })
+                                  );
+                                }
                             )
                           ],
                         );

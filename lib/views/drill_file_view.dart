@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flip/utilities/styles.dart';
 import 'package:flip/utilities/flip_database.dart';
 //import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
+import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 
 /// Creates and manages the Drill File screen.
 class DrillFileView extends StatefulWidget {
@@ -93,7 +94,7 @@ class _DrillFileViewState extends State<DrillFileView> {
                                     )
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsets.only(top: 165.0),
+                                  padding: const EdgeInsets.only(top: 155.0),
                                   child: Text(dataList[index]["drill_file_name"]),
                                 )
                             ),
@@ -111,6 +112,17 @@ class _DrillFileViewState extends State<DrillFileView> {
                                 //       )
                                 //   );
                                 // }
+                              onTap: () async {
+                                Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(builder: (context) {
+                                    return PDF(
+                                      swipeHorizontal: true,
+                                      nightMode: true,
+                                    ).fromAsset('data/Dynamite/Blank_Drill_Chart.pdf');
+                                  })
+                                );
+                              }
                             )
                           ],
                         );

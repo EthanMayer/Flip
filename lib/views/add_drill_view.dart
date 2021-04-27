@@ -31,7 +31,7 @@ class _AddDrillViewState extends State<AddDrillView> {
     showID = await db.insert(FlipDatabase.drillShowTable, data);
 
     Map<String, dynamic> data2 = {
-      "drill_file_name" : _fileName + ".pdf",
+      "drill_file_name" : _showName + ".pdf",
       "drill_file" : file.readAsBytesSync(),
       "drill_show_id" : showID
     };

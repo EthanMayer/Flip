@@ -92,7 +92,7 @@ class _DrillShowViewState extends State<DrillShowView> {
                                     )
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsets.only(top: 160.0),
+                                  padding: const EdgeInsets.only(top: 150.0),
                                   child: Text(
                                       dataList[index]["drill_show_name"]),
                                 )

@@ -36,6 +36,8 @@ dependencies:
   modal_bottom_sheet: ^2.0.0
   #Fflutter_plugin_pdf_viewer:
   web_socket_channel:
+  flutter_cached_pdfview:
+  path_provider:
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -61,6 +63,8 @@ flutter:
   assets:
     - assets/images/
     - data/Dynamite/Dynamite_2019-AllParts.pdf
+    - data/Dynamite/Alma_Mater_Score.pdf
+    - data/Dynamite/Blank_Drill_Chart.pdf
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

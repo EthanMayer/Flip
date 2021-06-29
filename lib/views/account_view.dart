@@ -25,6 +25,9 @@ class _AccountViewState extends State<AccountView> {
   String _university = "University";
   String _instrument = "Instrument";
 
+  // Text controllers for input fields
+  TextEditingController _nameController;
+
   // List of universities that can participate in the marching band.
   List<Text> _universityList = const [
     Text('Belmont', style: Styles.textRow),
@@ -63,11 +66,20 @@ class _AccountViewState extends State<AccountView> {
     _setup();
   }
 
+  @override
+  void dispose() {
+    _nameController.dispose();
+    super.dispose();
+  }
+
   /// Asynchronously access the phone preferences on view load to grab data.
   _setup() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       _name = prefs.getString('name') ?? "";
+      _nameController = TextEditingController(
+        text: _name,
+      );
       _university = prefs.getString('university') ?? "University";
       _instrument = prefs.getString('instrument') ?? "Instrument";
     });
@@ -195,6 +207,7 @@ class _AccountViewState extends State<AccountView> {
                   child: SizedBox(
                     width: 350,
                     child: CupertinoTextField(
+                      controller: _nameController,
                       placeholder: "Name",
                       placeholderStyle: Styles.textRowPlaceholder,
                       style: Styles.textRowPlaceholder,

@@ -7,18 +7,21 @@ import 'home_view.dart';
 
 /// Manages dynamic state for the Account class.
 class AccountView extends StatefulWidget {
-  AccountView({Key key, this.first = false}) : super(key: key);
+  AccountView({Key key, this.first = false, this.conductor = true}) : super(key: key);
   final bool first;
+  final bool conductor;
 
   /// Creates the dynamic state for the Account class.
   @override
-  _AccountViewState createState() => _AccountViewState(first);
+  _AccountViewState createState() => _AccountViewState(first, conductor);
 }
 
 /// Creates and manages the Account screen.
 class _AccountViewState extends State<AccountView> {
-  _AccountViewState(this._first);
+  // Handles first launch of the app
+  _AccountViewState(this._first, this._conductor);
   bool _first;
+  bool _conductor;
 
   // Variables to keep a local copy of data.
   String _name = "Name";
@@ -66,6 +69,7 @@ class _AccountViewState extends State<AccountView> {
     _setup();
   }
 
+  /// Called upon view close to destroy previously allocated resources
   @override
   void dispose() {
     _nameController.dispose();
@@ -149,126 +153,158 @@ class _AccountViewState extends State<AccountView> {
         });
   }
 
+  List<Widget> _buildCommon(BuildContext context) {
+    if (_conductor) {
+      return <Widget>[
+        // Create the Star V image login page.
+        Padding(
+          padding: const EdgeInsets.only(top: 90.0),
+          child: Center(
+            child: Container(
+                width: 200,
+                height: 150,
+                child: Image.asset('assets/images/starV_873.png')),
+          ),
+        ),
+        // Create the name text field.
+        Padding(
+            padding: const EdgeInsets.only(
+                left: 0, right: 0, top: 50.0, bottom: 0),
+            child: SizedBox(
+              width: 350,
+              child: CupertinoTextField(
+                controller: _nameController,
+                placeholder: "Name",
+                placeholderStyle: Styles.textRowPlaceholder,
+                style: Styles.textRowPlaceholder,
+                textAlign: TextAlign.center,
+                padding: const EdgeInsets.only(
+                    left: 0.0, right: 0.0, top: 15.0, bottom: 15.0),
+                decoration: BoxDecoration(
+                  color: CupertinoColors.white,
+                  borderRadius: BorderRadius.circular(25.0),
+                ),
+                onSubmitted: (text) {
+                  _name = text;
+                  _updateName();
+                },
+              ),
+            )
+        ),
+      ];
+    } else {
+      return <Widget>[
+        // Create the Star V image login page.
+        Padding(
+          padding: const EdgeInsets.only(top: 90.0),
+          child: Center(
+            child: Container(
+                width: 200,
+                height: 150,
+                child: Image.asset('assets/images/starV_873.png')),
+          ),
+        ),
+        // Create the name text field.
+        Padding(
+            padding: const EdgeInsets.only(
+                left: 0, right: 0, top: 50.0, bottom: 0),
+            child: SizedBox(
+              width: 350,
+              child: CupertinoTextField(
+                controller: _nameController,
+                placeholder: "Name",
+                placeholderStyle: Styles.textRowPlaceholder,
+                style: Styles.textRowPlaceholder,
+                textAlign: TextAlign.center,
+                padding: const EdgeInsets.only(
+                    left: 0.0, right: 0.0, top: 15.0, bottom: 15.0),
+                decoration: BoxDecoration(
+                  color: CupertinoColors.white,
+                  borderRadius: BorderRadius.circular(25.0),
+                ),
+                onSubmitted: (text) {
+                  _name = text;
+                  _updateName();
+                },
+              ),
+            )
+        ),
+        // Create the university text field/picker.
+        Padding(
+            padding: const EdgeInsets.only(
+                left: 0, right: 0, top: 25.0, bottom: 0),
+            child: SizedBox(
+              width: 350,
+              child: CupertinoButton(
+                child: Text(
+                  _university,
+                  style: Styles.textRowPlaceholder,
+                ),
+                borderRadius: BorderRadius.circular(25.0),
+                color: CupertinoColors.white,
+                onPressed: () {
+                  _showUniversityPicker();
+                },
+              ),
+            )
+        ),
+        // Create the instrument text field/picker.
+        Padding(
+            padding: const EdgeInsets.only(
+                left: 30.0,
+                right: 30.0,
+                top: 25.0,
+                bottom: 0
+            ),
+            child: SizedBox(
+              width: 350,
+              child: CupertinoButton(
+                child: Text(
+                  _instrument,
+                  style: Styles.textRowPlaceholder,
+                ),
+                borderRadius: BorderRadius.circular(25.0),
+                color: CupertinoColors.white,
+                onPressed: () {
+                  _showInstrumentPicker();
+                },
+              ),
+            )
+        ),
+      ];
+    }
+  }
+
   /// Builds the UI using widgets.
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        automaticallyImplyLeading: false,
-        middle: Text('Account'),
-        // Left nav bar button, navigates to previous view.
-        // leading: CupertinoButton(
-        //     child: Text(
-        //       'Cancel',
-        //       style: TextStyle(
-        //         color: Styles.systemBlue,
-        //       ),
-        //     ),
-        //     padding: EdgeInsets.all(10),
-        //     onPressed: () {
-        //       Navigator.of(context).maybePop();
-        //     }),
-        // Right nav bar button, navigates to Home view.
-        trailing: CupertinoButton(
-          child: Text(
-            'Done',
-            style: TextStyle(
-                color: Styles.systemBlue,
-            ),
-          ),
-          padding: EdgeInsets.all(10),
-          onPressed: () {
-            if (!_first) {
-              Navigator.of(context).maybePop();
-            } else {
-              Navigator.pushReplacement(
-                  context, CupertinoPageRoute(builder: (_) => HomeView(conductor: false)
-              ));
-            }
-          }),
+        navigationBar: CupertinoNavigationBar(
+          automaticallyImplyLeading: false,
+          middle: Text('Account'),
+          // Right nav bar button, navigates to Home view.
+          trailing: CupertinoButton(
+              child: Text(
+                'Done',
+                style: TextStyle(
+                  color: Styles.systemBlue,
+                ),
+              ),
+              padding: EdgeInsets.all(10),
+              onPressed: () {
+                if (!_first) {
+                  Navigator.of(context).maybePop();
+                } else {
+                  Navigator.pushReplacement(
+                      context, CupertinoPageRoute(builder: (_) => HomeView(conductor: false)
+                  ));
+                }
+              }),
         ),
         child: SingleChildScrollView(
-          child: Column(
-              children: <Widget>[
-                // Create the Star V image login page.
-                Padding(
-                  padding: const EdgeInsets.only(top: 90.0),
-                  child: Center(
-                    child: Container(
-                        width: 200,
-                        height: 150,
-                        child: Image.asset('assets/images/starV_873.png')),
-                  ),
-                ),
-                // Create the name text field.
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 0, right: 0, top: 50.0, bottom: 0),
-                  child: SizedBox(
-                    width: 350,
-                    child: CupertinoTextField(
-                      controller: _nameController,
-                      placeholder: "Name",
-                      placeholderStyle: Styles.textRowPlaceholder,
-                      style: Styles.textRowPlaceholder,
-                      textAlign: TextAlign.center,
-                      padding: const EdgeInsets.only(
-                          left: 0.0, right: 0.0, top: 15.0, bottom: 15.0),
-                      decoration: BoxDecoration(
-                        color: CupertinoColors.white,
-                        borderRadius: BorderRadius.circular(25.0),
-                      ),
-                      onSubmitted: (text) {
-                        _name = text;
-                        _updateName();
-                      },
-                    ),
-                  )
-                ),
-                // Create the university text field/picker.
-                Padding(
-                    padding: const EdgeInsets.only(
-                        left: 0, right: 0, top: 25.0, bottom: 0),
-                    child: SizedBox(
-                      width: 350,
-                      child: CupertinoButton(
-                        child: Text(
-                          _university,
-                          style: Styles.textRowPlaceholder,
-                        ),
-                        borderRadius: BorderRadius.circular(25.0),
-                        color: CupertinoColors.white,
-                        onPressed: () {
-                          _showUniversityPicker();
-                        },
-                      ),
-                    )
-                ),
-                // Create the instrument text field/picker.
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 30.0,
-                      right: 30.0,
-                      top: 25.0,
-                      bottom: 0
-                  ),
-                  child: SizedBox(
-                    width: 350,
-                    child: CupertinoButton(
-                      child: Text(
-                        _instrument,
-                        style: Styles.textRowPlaceholder,
-                      ),
-                      borderRadius: BorderRadius.circular(25.0),
-                      color: CupertinoColors.white,
-                      onPressed: () {
-                        _showInstrumentPicker();
-                      },
-                    ),
-                  )
-                ),
-              ]
-          )
+            child: Column(
+                children: _buildCommon(context)
+            )
         )
     );
   }

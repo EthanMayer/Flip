@@ -227,7 +227,7 @@ class _HomeViewState extends State<HomeView> {
                         context: context,
                         expand: true,
                         duration: Duration(milliseconds: 300),
-                        builder: (_) => AccountView());
+                        builder: (_) => AccountView(conductor: conductor));
                   }
                 ),
             ),

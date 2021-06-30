@@ -47,24 +47,35 @@ class _LoginViewState extends State<LoginView> {
 
   /// Validate password when submitted to determine which view to load.
   _validatePassword() {
-    if(_password == CORRECT_PASSWORD || _password == CONDUCTOR_PASSWORD) {
-      //Client.initialize();
-      if (_firstLaunch && _password == CORRECT_PASSWORD) {
+    if (_password == CORRECT_PASSWORD) {
+      if (_firstLaunch) {
         Navigator.push(
-            context, CupertinoPageRoute(builder: (_) => AccountView(first: true)
-        ));
-      } else if (_password == CONDUCTOR_PASSWORD) {
-        Client.master = true;
-        Navigator.push(
-            context, CupertinoPageRoute(builder: (_) => TabView(c: true)
-        ));
+            context,
+            CupertinoPageRoute(builder: (_) => AccountView(first: _firstLaunch)
+            ));
       } else {
-        Navigator.pushReplacement(
-            context, CupertinoPageRoute(builder: (_) => TabView(c: false)
-        ));
+        Navigator.push(
+            context,
+            CupertinoPageRoute(builder: (_) => TabView()
+            ));
+      }
+    } else if (_password == CONDUCTOR_PASSWORD) {
+      Client.master = true;
+      if (_firstLaunch) {
+        Navigator.push(
+            context,
+            CupertinoPageRoute(builder: (_) => AccountView(
+                conductor: true,
+                first: _firstLaunch
+            )));
+      } else {
+        Navigator.push(
+            context,
+            CupertinoPageRoute(builder: (_) => TabView(conductor: true)
+            ));
       }
     } else {
-      _showDialog(context);
+    _showDialog(context);
     }
   }
 

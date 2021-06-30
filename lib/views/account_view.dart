@@ -7,7 +7,7 @@ import 'home_view.dart';
 
 /// Manages dynamic state for the Account class.
 class AccountView extends StatefulWidget {
-  AccountView({Key key, this.first = false, this.conductor = true}) : super(key: key);
+  AccountView({Key key, this.first = false, this.conductor = false}) : super(key: key);
   final bool first;
   final bool conductor;
 
@@ -296,7 +296,8 @@ class _AccountViewState extends State<AccountView> {
                   Navigator.of(context).maybePop();
                 } else {
                   Navigator.pushReplacement(
-                      context, CupertinoPageRoute(builder: (_) => HomeView(conductor: false)
+                      //context, CupertinoPageRoute(builder: (_) => HomeView(conductor: false)
+                      context, CupertinoPageRoute(builder: (_) => TabView(conductor: _conductor)
                   ));
                 }
               }),

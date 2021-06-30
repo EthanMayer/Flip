@@ -12,18 +12,18 @@ GlobalKey<NavigatorState> thirdTabNavKey = GlobalKey<NavigatorState>();
 
 /// Manages dynamic state for the class.
 class TabView extends StatefulWidget {
-  TabView({Key key, this.c}) : super(key: key);
-  final bool c;
+  TabView({Key key, this.conductor = false}) : super(key: key);
+  final bool conductor;
 
   /// Creates the dynamic state for the class.
   @override
-  _TabViewState createState() => _TabViewState(c);
+  _TabViewState createState() => _TabViewState(conductor);
 }
 
 /// Creates the tab bar at the bottom of the screen consisting of 3 tabs.
 class _TabViewState extends State<TabView> {
-  _TabViewState(this.c);
-  final bool c;
+  _TabViewState(this.conductor);
+  final bool conductor;
   /// Builds the UI using widgets.
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class _TabViewState extends State<TabView> {
           // Navigate to Home view.
           return CupertinoTabView(
             navigatorKey: firstTabNavKey,
-            builder: (BuildContext context) => HomeView(conductor: c),
+            builder: (BuildContext context) => HomeView(conductor: conductor),
           );
         } else if (index == 1) {
           // Navigate to Music view.

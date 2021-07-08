@@ -57,6 +57,7 @@ class _TabViewState extends State<TabView> {
           );
         } else if (index == 1) {
           // Navigate to Music view.
+          //MusicSongViewState(false).refreshData();
           return CupertinoTabView(
             navigatorKey: secondTabNavKey,
             builder: (BuildContext context) => MusicSongView(),

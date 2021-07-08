@@ -12,12 +12,12 @@ class MusicSongView extends StatefulWidget {
 
   /// Creates the dynamic state for the Music Folder class.
   @override
-  _MusicSongViewState createState() => _MusicSongViewState(modal);
+  MusicSongViewState createState() => MusicSongViewState(modal);
 }
 
 /// Creates and manages the Music Folder screen.
-class _MusicSongViewState extends State<MusicSongView> {
-  _MusicSongViewState(this.modal);
+class MusicSongViewState extends State<MusicSongView> {
+  MusicSongViewState(this.modal);
   final bool modal;
   FlipDatabase db = FlipDatabase.instance;
   List<Map<String, dynamic>> dataList;
@@ -26,10 +26,10 @@ class _MusicSongViewState extends State<MusicSongView> {
   @override
   void initState() {
     super.initState();
-    _refreshData();
+    refreshData();
   }
 
-  _refreshData() {
+  refreshData() {
     setState(() {
       _getData();
     });
@@ -63,7 +63,7 @@ class _MusicSongViewState extends State<MusicSongView> {
                   padding: EdgeInsets.all(10),
                   // Navigates to Account View when pressed.
                   onPressed: () {
-                    _refreshData();
+                    refreshData();
                   }),
             ),
             SliverPadding(
@@ -101,7 +101,7 @@ class _MusicSongViewState extends State<MusicSongView> {
                       GestureDetector(
                           onTap: () {
                             setState(() {
-                              _refreshData();
+                              refreshData();
                             });
                             if (!modal) {
                               Navigator.push(

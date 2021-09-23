@@ -129,41 +129,40 @@ class _MusicFileViewState extends State<MusicFileView> {
                                 //       )
                                 //   );
                                 // }
-                              // onTap: () async {
-                              //   File song = File.fromRawPath(dataList[index]["music_file"]);
-                              //   String fileName = Path.basename(song.path);
-                              //   await song.copy('$tmpPath/$fileName');
-                              //   Navigator.push(
-                              //       context,
-                              //       CupertinoPageRoute(builder: (context) {
-                              //         return PDF(
-                              //           swipeHorizontal: true,
-                              //           nightMode: true,
-                              //         ).fromPath('$tmpPath/$fileName');
-                              //         //fromAsset(song.path);
-                              //         // fromAsset('data/Dynamite/Dynamite_2019-AllParts.pdf');
-                              //       }
-                              //       )
-                              //   );
-                              // }
-                                onTap: () async {
-                                  Navigator.push(
+                              onTap: () async {
+                                File song = File.fromRawPath(dataList[index]["music_file"]);
+                                String fileName = Path.basename(song.path);
+                                await song.copy('$tmpPath/$fileName');
+                                Navigator.push(
                                     context,
                                     CupertinoPageRoute(builder: (context) {
-                                      if (index == 1) {
-                                        return PDF(
-                                          swipeHorizontal: true,
-                                          nightMode: true,
-                                        ).fromAsset('data/Dynamite/Dynamite_2019-AllParts.pdf');
-                                      } else {
-                                        return PDF(
-                                          swipeHorizontal: true,
-                                          nightMode: true,
-                                        ).fromAsset('data/Dynamite/Alma_Mater_Score.pdf');
-                                      }
+                                      return PDF(
+                                        swipeHorizontal: true,
+                                        nightMode: true,
+                                      ).fromPath('$tmpPath/$fileName');
+                                      //fromAsset(song.path);
+                                      // fromAsset('data/Dynamite/Dynamite_2019-AllParts.pdf');
                                     })
-                                  );
-                                }
+                                );
+                              }
+                              //   onTap: () async {
+                              //     Navigator.push(
+                              //       context,
+                              //       CupertinoPageRoute(builder: (context) {
+                              //         if (index == 1) {
+                              //           return PDF(
+                              //             swipeHorizontal: true,
+                              //             nightMode: true,
+                              //           ).fromAsset('data/Dynamite/Dynamite_2019-AllParts.pdf');
+                              //         } else {
+                              //           return PDF(
+                              //             swipeHorizontal: true,
+                              //             nightMode: true,
+                              //           ).fromAsset('data/Dynamite/Alma_Mater_Score.pdf');
+                              //         }
+                              //       })
+                              //     );
+                              //   }
                             )
                           ],
                         );

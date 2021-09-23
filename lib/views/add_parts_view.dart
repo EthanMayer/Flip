@@ -5,6 +5,8 @@ import 'package:flip/utilities/flip_database.dart';
 import 'package:file_picker/file_picker.dart';
 import 'dart:io';
 import 'home_view.dart';
+import 'package:path/path.dart' as Path;
+import 'package:path_provider/path_provider.dart';
 
 class AddPartsView extends StatefulWidget {
   AddPartsView({Key key, this.id}) : super(key: key);
@@ -15,7 +17,7 @@ class AddPartsView extends StatefulWidget {
   _AddPartsViewState createState() => _AddPartsViewState(id);
 }
 
-/// Creates and manages the Account screen.
+/// Creates and manages the Add Parts screen.
 class _AddPartsViewState extends State<AddPartsView> {
   _AddPartsViewState(this.songID);
   final int songID;
@@ -33,9 +35,11 @@ class _AddPartsViewState extends State<AddPartsView> {
     };
     partID = await db.insert(FlipDatabase.musicInstrumentTable, data);
 
+    Future<File> newFile = file.copy(await _localPath);
+
     Map<String, dynamic> data2 = {
       "music_file_name" : _partName + ".pdf",
-      "music_file" : file.readAsBytesSync(),
+      "music_file" : newFile,//file.readAsBytesSync(),
       "music_instrument_id" : partID
     };
     await db.insert(FlipDatabase.musicFileTable, data2);
@@ -52,6 +56,14 @@ class _AddPartsViewState extends State<AddPartsView> {
       });
     }
   }
+
+  Future<String> get _localPath async {
+    final directory = await getApplicationDocumentsDirectory();
+
+    return directory.path;
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
